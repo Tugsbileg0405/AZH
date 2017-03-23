@@ -28,10 +28,10 @@ class AppController extends Controller
 
     public function createSubscribe(){
        $email = Input::get('email');
-       Mail::send('mail', ['email' => $email], function($message) use ($email) {
-			$message->to($email);
-			$message->subject('Ардчилсан залуучуудын холбоо');
-		});
+    //    Mail::send('mail', ['email' => $email], function($message) use ($email) {
+	// 		$message->to($email);
+	// 		$message->subject('Ардчилсан залуучуудын холбоо');
+	// 	});
          return redirect('/')->with('substatus', 'Дагасанд баярлалаа!');
     }
 }
