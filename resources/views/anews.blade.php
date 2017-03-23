@@ -29,7 +29,7 @@
                         <h2 class="description">Мэдээ мэдээлэл</h2>
                     </div>
                     @foreach($latestnews as $news)
-                     <div class="card card-blog card-plain card-side animated bounceInUp ">
+                     <div class="card card-blog card-plain card-side animated bounceInUp card-side">
                          <a href="{{ url('news', $news->id) }}" class="header">
                              <h6 class="card-date">{{$news->created_at}}</h6>
                              <img src="{{ asset($news->image) }}" class="image-header">

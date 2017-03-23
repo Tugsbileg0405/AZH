@@ -92,17 +92,21 @@
                 <div class="col-md-3 col-sm-3 ">
                     <div class="info ">
                         <h5 class="title ">Мэдээлэл хүлээж авах</h5>
+                        
                         <nav>
                             <ul>
-                                <li style="margin-bottom: 10px ">
-                                    <input type="text " class="input-sbr " placeholder="Таны цахим шуудан: ">
-                                </li>
-                                <li>
-                                    <button class="btn btn-white ">Бүртгүүлэх</button>
-                                </li>
+                                <form action="{{ url('/subscribe') }}" id="subscribeform" method="POST">
+                                     <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
+                                    <li style="margin-bottom: 10px ">
+                                        <input type="email" required class="input-sbr " name="email" placeholder="Таны цахим шуудан: ">
+                                    </li>
+                                    <li>
+                                        <button class="btn btn-white" type="submit">Бүртгүүлэх</button>
+                                    </li>
+                                </form>
                             </ul>
-
                         </nav>
+                        
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@
                         <div class="row admin-header">
                                 <div class="col-xs-6">
                                     <div class="header">
-                                        <h4 class="title">Хөтөлбөрийн ангилал</h4>
+                                        <h4 class="title">Хөтөлбөрийн сэтгэгдэл</h4>
                                     </div>
                                 </div>
                                 <div class="col-xs-6" >
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                          <div class="card">
+                        <div class="card">
                             <div class="content">
                                 <div class="toolbar">
                                 </div>
@@ -30,11 +30,12 @@
                                     <div id="datatables_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <table id="pronametable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                                                <table id="commenttable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
                                                     <thead>
                                                         <tr role="row">
                                                             <th>ID</th>
-                                                            <th>Нэр</th>
+                                                            <th>Гарчиг</th>
+                                                            <th>Хөтөлбөрийн нэр</th>
                                                             <th>Үүсгэсэн огноо</th>
                                                             <th>Засварлах/Устгах</th>
                                                         </tr>
@@ -42,7 +43,8 @@
                                                     <tfoot>
                                                         <tr>
                                                             <th>ID</th>
-                                                            <th>Нэр</th>
+                                                            <th>Гарчиг</th>
+                                                            <th>Хөтөлбөрийн нэр</th>
                                                             <th>Үүсгэсэн огноо</th>
                                                             <th>Засварлах/Устгах</th>
                                                         </tr>
@@ -66,27 +68,70 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Хөтөлбөрийн ангилал нэмэх</h4>
+                        <h4 class="modal-title">Хөтөлбөр сэтгэгдэл нэмэх</h4>
                     </div>
                     <div class="modal-body">
-                         <form method="POST" id="myform" action="{{ url('/admin/programname') }}">
+                         <form method="POST" id="myform" action="{{ url('/admin/programcomment') }}">
                                    <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Хөтөлбөрийн нэр:</label>
-                                                <input type="text" required class="form-control border-input" name='name' placeholder="Хөтөлбөрийн нэр">
+                                                <label>Гарчиг:</label>
+                                                <input type="text" required class="form-control border-input" name='title' placeholder="Гарчиг">
                                             </div>
                                         </div>
                                     </div>
-                                     <div class="row">
+
+                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Тайлбар</label>
-                                                <textarea rows="5" required class="form-control border-input" name="description" placeholder="Тайлбар оруулна уу..."></textarea>
+                                                <label>Дэд гарчиг</label>
+                                                 <input type="text" required class="form-control border-input" name='subtitle' placeholder="Дэд гарчиг">
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Сэтгэгдэл:</label>
+                                                <textarea rows="5" required class="form-control border-input" name="comment" placeholder="Сэтгэгдэл оруулна уу..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                 <label>Зураг:</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-info btn-fill ">
+                                                        <i class="fa fa-picture-o"></i> Сонгох
+                                                        </a>
+                                                    </span>
+                                                    <input id="thumbnail" class="form-control border-input"  type="text" name="filepath">
+                                                </div>
+                                                <img id="holder" style="margin-top:15px;max-height:100px;">
+                                            </div>
+                                        </div>
+                                    </div>  
+
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Хөтөлбөр ангилал:</label>
+                                                <select class="form-control" required name="programname">
+                                                    <option value="">Хөтөлбөр ангилал сонгоно уу</option>
+                                                    @foreach($programNames as $programName)
+                                                    <option value="{{ $programName->id }}">{{ $programName->name }}</option>
+                                                    @endforeach
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-info btn-fill btn-wd">Нэмэх</button>
                                     </div>
@@ -101,16 +146,30 @@
 
 @push('script')
    <script type="text/javascript">
-               $('#myform').bootstrapValidator({
+             $('#myform').bootstrapValidator({
              fields: {
-                 name: {
+                 title: {
                      validators: {
                          notEmpty: {
                              message: '* Талбарын утгыг бөглөнө үү'
                          }
                      }
                  },
-                   description: {
+                subtitle: {
+                     validators: {
+                         notEmpty: {
+                             message: '* Талбарын утгыг бөглөнө үү'
+                         }
+                     }
+                 },
+                comment: {
+                     validators: {
+                         notEmpty: {
+                             message: '* Талбарын утгыг бөглөнө үү'
+                         }
+                     }
+                 },
+                programname: {
                      validators: {
                          notEmpty: {
                              message: '* Талбарын утгыг бөглөнө үү'
@@ -120,7 +179,7 @@
              }
          });
 
-                 var table = $('#pronametable').DataTable({
+              var table = $('#commenttable').DataTable({
                     processing: true,
                     serverSide: true,
                     iDisplayLength: 5,
@@ -128,16 +187,17 @@
                         "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                     pagingType: "full_numbers",
-                    ajax: '{!! route('datatables.allpronames') !!}',
+                    ajax: '{!! route('datatables.allprogramcomments') !!}',
                     columns: [
                         { data: 'id', name: 'id' },
-                        { data: 'name', name: 'name' },
+                        { data: 'title', name: 'title' },
+                        { data: 'program_name.name', name: 'program_name.name', orderable: false, searchable: false },
                         { data: 'created_at', name: 'created_at' },
                          {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]
                 });
 
-                  function deleteProName(id){
+                  function deleteProgramComment(id){
                         swal({
                             title: 'Утсгахдаа итгэлтэй байна уу?',
                             type: 'warning',
@@ -152,8 +212,8 @@
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                     }
                             });
-                            $.post( "{{ url('admin/allpronames/delete') }}"+ "/" + id, function( data ) {
-                                    $('#pronametable').DataTable().draw(false);
+                            $.post( "{{ url('admin/allprogramcomments/delete') }}"+ "/" + id, function( data ) {
+                                    $('#commenttable').DataTable().draw(false);
                                     swal(
                                         '',
                                         'Амжилттай устлаа',
@@ -163,10 +223,13 @@
                             })
                         }
 
-             @if (session('programnamestatus'))
+    
+            $('#lfm').filemanager('image');
+
+            @if (session('pcommentstatus'))
         	$.notify({
             	icon: 'fa fa-check',
-            	message: " {{ session('programnamestatus') }}"
+            	message: " {{ session('pcommentstatus') }}"
 
             },{
                 type: 'success',

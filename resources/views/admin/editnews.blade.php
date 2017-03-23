@@ -8,16 +8,16 @@
             <div class="col-lg-8 col-lg-offset-2">
               <div class="card">
                     <div class="header">
-                        <h4 class="title">Мэдээ оруулах</h4>
+                        <h4 class="title">Мэдээ засах</h4>
                     </div>
                     <div class="content">
-                        <form method="POST" id="myform" action="{{ url('/admin/addnews') }}">
+                        <form method="POST" id="myform" action="{{ url('/admin/news/edit', $news->id) }}">
                             <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Гарчиг</label>
-                                        <input type="text" class="form-control border-input" required name='title' placeholder="Гарчиг">
+                                        <input type="text" value="{{$news->title}}" class="form-control border-input" required name='title' placeholder="Гарчиг">
                                     </div>
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                                         <i class="fa fa-picture-o"></i> Сонгох
                                                         </a>
                                                     </span>
-                                            <input id="thumbnail" class="form-control border-input" type="text" name="filepath">
+                                            <input id="thumbnail" value="{{$news->image}}" class="form-control border-input" type="text" name="filepath">
                                         </div>
                                         <img id="holder" style="margin-top:15px;max-height:100px;">
                                     </div>
@@ -44,7 +44,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Богино танилцуулга</label>
-                                        <textarea rows="5" class="form-control border-input" required name="shortdescription" placeholder="Богино танилцуулга оруулна уу..."></textarea>
+                                        <textarea rows="5" value="" class="form-control border-input" required name="shortdescription" placeholder="Богино танилцуулга оруулна уу...">{{$news->short_description}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Контент</label>
-                                        <textarea rows="5" class="form-control my-editor border-input" required name="description" placeholder="Контентоо оруулна уу..."></textarea>
+                                        <textarea rows="5" class="form-control my-editor border-input"  required name="description" placeholder="Контентоо оруулна уу...">{{$news->content}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -63,9 +63,9 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Ангилал</label>
-                                        <select class="form-control" required name="category" style="border: 1px solid #CCC5B9">
+                                        <select class="form-control" required name="category"  style="border: 1px solid #CCC5B9">
                                                     @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}" {{ $news->news_category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                                     @endforeach
                                         </select>
                                     </div>
@@ -78,10 +78,12 @@
                                         <label>Салбар</label>
                                         <select class="form-control" required name="location" style="border: 1px solid #CCC5B9">
                                                     @foreach($locations as $location)
-                                                    <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                                    <option value="{{ $location->id }}" {{ $news->location_id == $location->id ? 'selected' : '' }}>{{ $location->name }}</option>
                                                     @endforeach
                                         </select>
                                     </div>
+
+                                    
                                 </div>
                             </div>
 
@@ -102,45 +104,6 @@
 @push('script')
 	<script type="text/javascript">
         $('#lfm').filemanager('image');
-         $('#myform').bootstrapValidator({
-             fields: {
-                 title: {
-                     validators: {
-                         notEmpty: {
-                             message: '* Талбарын утгыг бөглөнө үү'
-                         }
-                     }
-                 },
-                   shortdescription: {
-                     validators: {
-                         notEmpty: {
-                             message: '* Талбарын утгыг бөглөнө үү'
-                         }
-                     }
-                 },
-                   description: {
-                     validators: {
-                         notEmpty: {
-                             message: '* Талбарын утгыг бөглөнө үү'
-                         }
-                     }
-                 },
-                   category: {
-                     validators: {
-                         notEmpty: {
-                             message: '* Талбарын утгыг бөглөнө үү'
-                         }
-                     }
-                 },    
-                location: {
-                     validators: {
-                         notEmpty: {
-                             message: '* Талбарын утгыг бөглөнө үү'
-                         }
-                     }
-                 },
-             }
-         });
     	$(document).ready(function(){
             @if (session('status'))
         	$.notify({

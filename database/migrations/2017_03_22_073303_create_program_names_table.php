@@ -16,6 +16,7 @@ class CreateProgramNamesTable extends Migration
         Schema::create('program_names', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->text('description')->nullable()->default(null);;
             $table->timestamps();
         });
     }

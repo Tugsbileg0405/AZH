@@ -74,6 +74,8 @@
     </div>
 </div>
 
+
+@if(!$ProgramNames->isEmpty())
 <div class="section section-news">
     <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
         <div class="container">
@@ -94,6 +96,7 @@
         </div>
         <div class="carousel-inner" role="listbox">
             @inject('programs','App\Program') 
+            @inject('comments','App\Programcomment') 
             @foreach($ProgramNames as $index => $ProgramName)
             <div class="item @if($index == 0) {{ 'active' }} @endif">
                 <div class="container carousel-contain">
@@ -104,23 +107,27 @@
                         <div class="col-md-10 col-md-offset-1">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-                                    <p class="slider-title">{{$ProgramName->name}}</p>
+                                    <a href="{{ url('programs', $ProgramName->id) }}">
+                                         <p class="slider-title">{{$ProgramName->name}}</p>
+                                    </a>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-8 col-sm-8">
-                                    <ul id="responsive{{$index}}">
-                                        @foreach($programs->where('ProgramName_id',$ProgramName->id)->orderBy('created_at', 'desc')->get() as $program)
-                                        <li>
-                                            <div class="card info-section filter filter-color-blue">
-                                                <img class="card-img" src="{{ asset('img/header-1.jpeg') }}" alt="Card image">
-                                                <div class="content">
-                                                    <p class="card-text">{{ $program->title }}</p>
-                                                </div>
-                                            </div>
-                                        </li>
+                                    <div class="row">
+                                        @foreach($programs->where('ProgramName_id',$ProgramName->id)->orderBy('created_at', 'desc')->take(3)->get() as $program)
+                                        <a href="{{ url('program', $program->id) }}">
+                                                 <div class="col-xs-6  col-md-4 col-sm-4">
+                                                    <div class="card info-section">
+                                                        <img class="card-img" src="{{ asset($program->image) }}" alt="Card image">
+                                                        <div class="content">
+                                                            <p class="card-text">{{ $program->title }}</p>
+                                                        </div>
+                                                    </div>
+                                                 </div>
+                                        </a>
                                         @endforeach
-                                    </ul>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -129,22 +136,26 @@
                                 </div>
                                 <div class="col-md-12 col-sm-12" id="comment">
                                     <div class="row">
-                                        <div class="col-md-8 col-sm-8" id="comments">
+                                         @foreach($comments->where('program_id',$ProgramName->id)->orderBy('created_at', 'desc')->take(1)->get() as $comment)
+                                         <div class="col-md-8 col-sm-8" id="comments">
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    <img class="media-object" src="{{ asset('img/faces/face_1.jpg') }}" alt="Media Object">
+                                                    <img class="media-object" src="{{ asset($comment->imageURL) }}" alt="Media Object">
                                                 </a>
                                                 <div class="media-body">
-                                                    <h4 class="media-heading">Media heading</h4>
-                                                    <p>Text is here</p>
-                                                    This is some sample text. This is some sample text. This is some sample text. This is some sample text. This is some sample text. This is some sample text. This is some sample text. This is some sample text.
+                                                    <h4 class="media-heading">{{ $comment->title }}</h4>
+                                                    <p>{{ $comment->subtitle }}</p>
+                                                    <span>{{ $comment->description }}</span>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endforeach
+                                        <a href="{{ url('programs') }}">
                                         <button class="btn btn-showinfo">
                                                 Хөтөлбөрүүдийг харах
                                                 <i class="fa fa-chevron-right"></i>
                                         </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -165,7 +176,7 @@
         </a>
     </div>
 </div>
-
+@endif
 
 
 
@@ -184,7 +195,7 @@
                     <div class=" col-md-10 col-md-offset-1">
                         <div class="row">
                             @foreach($latestnews as $news)
-                            <div class="col-xs-6  col-md-4 col-sm-4">
+                            <div class="col-xs-12  col-md-4 col-sm-4">
                                 <div class="card">
                                     <a href="{{ url('news', $news->id) }}">
                                         <img class="card-img-top" src="{{ asset($news->image) }}">
@@ -291,63 +302,56 @@
 
 @push('script')
     <script>
-          $('#myCarousel').on('slide.bs.carousel', function (e) {
-                var active = $(e.target).find('.carousel-inner > .item.active');
-                var from = active.index()+1;
-                var next = $(e.relatedTarget);
-                var to = next.index();
-                $('#responsive' + from ).lightSlider({
-                            item: 3,
-                            loop: false,
-                            slideMove: 2,
-                            easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-                            speed: 600,
-                            responsive: [{
-                                    breakpoint: 800,
-                                    settings: {
-                                        item: 3,
-                                        slideMove: 1,
-                                        slideMargin: 6,
-                                    }
-                                },
-                                {
-                                    breakpoint: 480,
-                                    settings: {
-                                        item: 2,
-                                        slideMove: 1
-                                    }
-                                }
-                            ]
-                    });
-            })
+
+        //     var slider = [];
+        //     var length = $('#number').val();
+        //     var i = 0; 
+        //     if(length > 0){
+        //          for(i; i< length;i++){
+        //            slider.push($('#responsive' + i ).lightSlider({
+        //                     item: 3,
+        //                     loop: false,
+        //                     slideMove: 2,
+        //                     easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+        //                     speed: 600,
+        //                     responsive: [{
+        //                             breakpoint: 800,
+        //                             settings: {
+        //                                 item: 3,
+        //                                 slideMove: 1,
+        //                                 slideMargin: 6,
+        //                             }
+        //                         },
+        //                         {
+        //                             breakpoint: 480,
+        //                             settings: {
+        //                                 item: 2,
+        //                                 slideMove: 1
+        //                             }
+        //                         }
+        //                     ]
+        //             }));
+        //         }
+        //     }
+
+        //   $('#myCarousel').on('slide.bs.carousel', function (e) {
+        //         var active = $(e.target).find('.carousel-inner > .item.active');
+        //         var from = active.index();
+        //         var next = $(e.relatedTarget);
+        //         var to = next.index();
+        //         slider[from].refresh();
+        //     })
             
-            var length = $('#number').val();
-            var i = 0; 
-            for(i; i< length;i++){
-                $('#responsive' + i ).lightSlider({
-                        item: 3,
-                        loop: false,
-                        slideMove: 2,
-                        easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-                        speed: 600,
-                        responsive: [{
-                                breakpoint: 800,
-                                settings: {
-                                    item: 3,
-                                    slideMove: 1,
-                                    slideMargin: 6,
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    item: 2,
-                                    slideMove: 1
-                                }
-                            }
-                        ]
-                });
-            }
-         
+          
+            @if (session('substatus'))
+        	$.notify({
+            	icon: 'fa fa-check',
+            	message: " {{ session('substatus') }}"
+
+            },{
+                type: 'success',
+                timer: 2000
+            });
+           @endif
     </script>
 @endpush

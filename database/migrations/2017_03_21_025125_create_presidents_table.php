@@ -17,9 +17,9 @@ class CreatePresidentsTable extends Migration
             $table->increments('id');
             $table->string('firstname');
             $table->string('lastname');
-            $table->integer('year');
+            $table->integer('year')->nullable()->default(null);;
             $table->text('description');
-            $table->string('photo_URL');
+            $table->string('photo_URL')->nullable()->default(null);
             $table->timestamps();
         });
     }

@@ -10,4 +10,9 @@ class ProgramName extends Model
     {
         return $this->hasMany('App\Program', 'programName_id');
     }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Programcommnet', 'program_id');
+    }
 }

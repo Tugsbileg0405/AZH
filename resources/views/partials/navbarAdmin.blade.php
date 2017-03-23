@@ -12,6 +12,7 @@
                     <ul class="nav navbar-nav navbar-right">
                          <li>
                             <a href="{{ url('/') }}" target='_blank'>
+                                <i class="fa fa-globe"></i>
                                 Веб хуудас
                             </a>
                         </li>

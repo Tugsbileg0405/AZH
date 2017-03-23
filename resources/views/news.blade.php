@@ -14,7 +14,7 @@
                                 </div>
                             @else
                             @foreach($allnews as $news)
-                            <div class="card card-blog card-plain">
+                            <div class="card card-blog card-plain card-allnews">
                                 <h6 class="card-date">{{$news->created_at}}</h6>
                                 <a class="header" href="{{ url('news', $news->id) }}">
                                     <img src="{{ asset($news->image) }}" class="image-header">
@@ -23,7 +23,7 @@
                                     <a class="card-title" href="{{ url('news', $news->id) }}">
                                         <h3>{{$news->title}}</h3>
                                     </a>
-                                    <p class="text-gray">{!! $news->content !!}</p>
+                                    <p class="text-gray">{!! $news->short_description !!}</p>
                                 </div>
                                 <a class="btn btn-gray" href="{{ url('news', $news->id) }}">Дэлгэрэнгүй унших
                                     <i class="fa fa-chevron-right"></i>

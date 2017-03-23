@@ -5,53 +5,63 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+                  <div class="col-md-12">
+                        <div class="row admin-header">
+                                <div class="col-xs-6">
+                                    <div class="header">
+                                        <h4 class="title">Салбарууд</h4>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6" >
+                                    <div class="pull-right">
+                                        <button class="btn btn-info btn-fill btn-icon btn-lg" data-toggle="modal" data-target="#myModal">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
                     <div class="col-md-12">
                         <div class="card">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="header">
-                                         <h4 class="title">Салбарууд</h4>
-                                     </div>
-                                </div>
-                                <div class="col-md-3 col-md-offset-6">
-                                     <div class="pull-right">
-										<button class="btn btn-info btn-fill btn-icon btn-lg" data-toggle="modal" data-target="#myModal">
-											<i class="fa fa-plus"></i>
-										</button>
-									</div>
+                        <div class="content">
+                            <div class="toolbar">
+                            </div>
+                            <div class="fresh-datatables">
+                                <div id="datatables_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="locationtable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th>ID</th>
+                                                        <th>Салбарын нэр</th>
+                                                        <th>Холбогдох хүний нэр</th>
+                                                        <th>Холбогдох хүний дугаар</th>
+                                                        <th>Холбогдох хүний и-мэйл</th>
+                                                        <th>Огноо</th>
+                                                        <th>Засварлах/Устгах</th>
+                                                    </tr>
+                                                </thead>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>Салбарын нэр</th>
+                                                        <th>Холбогдох хүний нэр</th>
+                                                        <th>Холбогдох хүний дугаар</th>
+                                                        <th>Холбогдох хүний и-мэйл</th>
+                                                        <th>Огноо</th>
+                                                        <th>Засварлах/Устгах</th>
+                                                    </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                             @if($locations->isEmpty())
-                             <div class="header">
-                                <div class="typo-line">
-                                    <p class="category">Бүртгэгдсэн салбар байхгүй байна.</p>
-                                </div>
-                              </div>
-                            @else
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <th>ID</th>
-                                            <th>Салбарын нэр</th>
-                                            <th>Холбогдох хүний нэр</th>
-                                            <th>Холбогдох хүний дугаар</th>
-                                            <th>Холбогдох хүний и-мэйл</th>
-                                        </thead>
-                                        <tbody>
-                                                @foreach ($locations as $location)
-                                                <tr>
-                                                    <td>{{ $location->id }}</td>
-                                                    <td>{{ $location->name }}</td>
-                                                    <td>{{ $location->c_person_name }}</td>
-                                                    <td>{{ $location->c_person_phone }}</td>
-                                                    <td>{{ $location->c_person_email }}</td>
-                                                </tr>
-                                                @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -65,13 +75,13 @@
                         <h4 class="modal-title">Салбар нэмэх</h4>
                     </div>
                     <div class="modal-body">
-                         <form method="POST" action="{{ url('/admin/location') }}">
+                         <form method="POST" id="myform" action="{{ url('/admin/location') }}">
                                    <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Аймаг/Дүүрэг нэр:</label>
-                                                  <select class="form-control" name='name'>
+                                                  <select class="form-control" required name='name'>
                                                         <option value="">Аймаг/Дүүрэг нэр</option>
                                                         <option value="Улаанбаатар">Улаанбаатар</option>
                                                         <option value="Багануур">Багануур</option>
@@ -122,7 +132,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                  <label>Холбогдох хүний нэр:</label>
-                                                <input type="text" class="form-control border-input" name='cpersonname' placeholder="Холбогдох хүний нэр">
+                                                <input type="text" required class="form-control border-input" name='cpersonname' placeholder="Холбогдох хүний нэр">
                                             </div>
                                         </div>
                                     </div>
@@ -131,7 +141,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                  <label>Холбогдох хүний дугаар:</label>
-                                                <input type="text" class="form-control border-input" name='cpersonphone' placeholder="Холбогдох хүний дугаар">
+                                                <input type="text" required class="form-control border-input" name='cpersonphone' placeholder="Холбогдох хүний дугаар">
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +150,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                  <label>Холбогдох хүний и-мэйл:</label>
-                                                <input type="email" class="form-control border-input" name='cpersonemail' placeholder="Холбогдох хүний и-мэйл">
+                                                <input type="email" class="form-control border-input" required name='cpersonemail' placeholder="Холбогдох хүний и-мэйл">
                                             </div>
                                         </div>
                                     </div>
@@ -162,6 +172,88 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAChBN0MVMVMizgvWhVZBFZ3afH4xWNGhQ&sensor=false&libraries=places&callback=initMap">
     </script>
    <script type="text/javascript">
+            $('#myform').bootstrapValidator({
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {
+                                message: '* Талбарын утгыг бөглөнө үү'
+                            }
+                        }
+                    },
+                    cpersonname: {
+                        validators: {
+                            notEmpty: {
+                                message: '* Талбарын утгыг бөглөнө үү'
+                            }
+                        }
+                    },
+                    cpersonphone: {
+                        validators: {
+                            notEmpty: {
+                                message: '* Талбарын утгыг бөглөнө үү'
+                            }
+                        }
+                    },
+                    cpersonemail: {
+                        validators: {
+                            notEmpty: {
+                                message: '* Талбарын утгыг бөглөнө үү'
+                            },
+                            emailAddress: {
+                            message: '* И-мэйл хаяг биш байна.'
+                            }
+                        }
+                    },
+                }
+            });
+
+                 var table = $('#locationtable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    iDisplayLength: 5,
+                    dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                    pagingType: "full_numbers",
+                    ajax: '{!! route('datatables.getalllocations') !!}',
+                    columns: [
+                        { data: 'id', name: 'id' },
+                        { data: 'name', name: 'name' },
+                        { data: 'c_person_name', name: 'c_person_name' },
+                        { data: 'c_person_phone', name: 'c_person_phone' },
+                        { data: 'c_person_email', name: 'c_person_email' },
+                        { data: 'created_at', name: 'created_at' },
+                         {data: 'action', name: 'action', orderable: false, searchable: false}
+                    ]
+                });
+
+                  function deleteLocation(id){
+                        swal({
+                            title: 'Утсгахдаа итгэлтэй байна уу?',
+                            type: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Устгах',
+                            cancelButtonText: 'Гарах'
+                        }).then(function () {
+                            $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                            });
+                            $.post( "{{ url('admin/alllocations/delete') }}"+ "/" + id, function( data ) {
+                                    $('#locationtable').DataTable().draw(false);
+                                    swal(
+                                        '',
+                                        'Амжилттай устлаа',
+                                        'success'
+                                    )
+                            });
+                            })
+                      }
+
 
                 function initMap() {
                 var map = new google.maps.Map(document.getElementById('map'), {

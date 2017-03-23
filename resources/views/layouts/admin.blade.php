@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ config('app.locale') }}" >
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +12,7 @@
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <!-- Animation library for notifications   -->
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet"/>
-
+    <link href="{{asset('css/bootstrapValidator.min.css')}}" rel="stylesheet">
     <!--  Paper Dashboard core CSS    -->
      <link href="{{ asset('assets/css/paper-dashboard.css') }}" rel="stylesheet"/>
      <link href="{{ asset('assets/css/sweetalert2.min.css') }}" rel="stylesheet"/>
@@ -47,9 +47,8 @@
     <script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}" type="text/javascript"></script>
 	<!--  Checkbox, Radio & Switch Plugins -->
 	<script src="{{ asset('assets/js/bootstrap-checkbox-radio.js') }}"></script>
-
+    <script src="{{ asset('js/bootstrapValidator.min.js') }}"></script>
 	<!--  Charts Plugin -->
-	<script src="{{ asset('assets/js/chartist.min.js') }}"></script>
 
     <!--  Notifications Plugin    -->
     <script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>

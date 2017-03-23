@@ -17,7 +17,7 @@ class CreateHistoriesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('description');
-            $table->string('images');
+            $table->string('images')->nullable()->default(null);;
             $table->date('date');
             $table->timestamps();
         });

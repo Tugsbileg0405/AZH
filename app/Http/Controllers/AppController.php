@@ -7,6 +7,9 @@ use App\President;
 use App\News;
 use App\Slide;
 use App\ProgramName;
+use App\Programcomment;
+use Mail;
+use Illuminate\Support\Facades\Input;
 
 class AppController extends Controller
 {
@@ -21,5 +24,14 @@ class AppController extends Controller
             'slides' => $slides,
             'ProgramNames' => $ProgramNames,
         ]);
+    }
+
+    public function createSubscribe(){
+       $email = Input::get('email');
+       Mail::send('mail', ['email' => $email], function($message) use ($email) {
+			$message->to($email);
+			$message->subject('Ардчилсан залуучуудын холбоо');
+		});
+         return redirect('/')->with('substatus', 'Дагасанд баярлалаа!');
     }
 }

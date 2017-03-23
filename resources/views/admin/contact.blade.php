@@ -6,40 +6,46 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
+                        <div class="header">
                                 <h4 class="title">Cанал хүсэлтүүд</h4>
                             </div>
-                             @if($contacts->isEmpty())
-                             <div class="header">
-                                <div class="typo-line">
-                                    <p class="category">Cанал хүсэлт байхгүй байна.</p>
+                        <div class="card">
+                            <div class="content">
+                                <div class="toolbar">
                                 </div>
-                              </div>
-                            @else
-                                <div class="content table-responsive table-full-width">
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <th>ID</th>
-                                            <th>И-мэйл</th>
-                                            <th>Утас</th>
-                                            <th>Мессеж</th>
-                                            <th>Салбар</th>
-                                        </thead>
-                                        <tbody>
-                                                @foreach ($contacts as $contact)
-                                                <tr>
-                                                    <td>{{ $contact->id }}</td>
-                                                    <td>{{ $contact->c_email }}</td>
-                                                    <td>{{ $contact->c_phone }}</td>
-                                                    <td>{{ $contact->c_message }}</td>
-                                                    <td>{{ $contact->sector->name }}</td>
-                                                </tr>
-                                                @endforeach
-                                        </tbody>
-                                    </table>
+                                <div class="fresh-datatables">
+                                    <div id="datatables_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table id="contacttable" class="table table-striped table-no-bordered table-hover dataTable dtr-inline" cellspacing="0" width="100%" style="width: 100%;" role="grid" aria-describedby="datatables_info">
+                                                    <thead>
+                                                        <tr role="row">
+                                                            <th>ID</th>
+                                                            <th>И-мэйл</th>
+                                                            <th>Мессеж</th>
+                                                            <th>Утас</th>
+                                                            <th>Салбар</th>
+                                                            <th>Огноо</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>И-мэйл</th>
+                                                            <th>Мессеж</th>
+                                                            <th>Утас</th>
+                                                            <th>Салбар</th>
+                                                            <th>Огноо</th>
+                                                        </tr>
+                                                    </tfoot>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,3 +53,30 @@
         </div>
 
 @endsection
+
+@push('script')
+
+<script>
+          var table = $('#contacttable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    iDisplayLength: 5,
+                    dom: "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                    pagingType: "full_numbers",
+                    ajax: '{!! route('datatables.getallcontact') !!}',
+                    columns: [
+                        { data: 'id', name: 'id' },
+                        { data: 'c_email', name: 'c_email' },
+                        { data: 'c_message', name: 'c_message' },
+                        { data: 'c_phone', name: 'c_phone' },
+                        { data: 'sector.name', name: 'sector.name' },
+                        { data: 'created_at', name: 'created_at' },
+                    ]
+                });
+               
+
+</script>
+
+@endpush
