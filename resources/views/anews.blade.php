@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <div class="card card-blog card-plain card-news card-anews">
-                                <h6 class="card-date">{{$news->created_at}}</h6>
+                                <h6 class="card-date">{{ $news->created_at->format('Y оны m сарын d өдөр')  }}</h6>
                                  <a class="card-title">
                                         <h3>{{$news->title}}</h3>
                                  </a>
@@ -29,9 +29,9 @@
                         <h2 class="description">Мэдээ мэдээлэл</h2>
                     </div>
                     @foreach($latestnews as $news)
-                     <div class="card card-blog card-plain card-side animated bounceInUp card-side">
+                     <div class="card card-blog card-plain card-side card-side">
                          <a href="{{ url('news', $news->id) }}" class="header">
-                             <h6 class="card-date">{{$news->created_at}}</h6>
+                             <h6 class="card-date">{{ $news->created_at->format('Y оны m сарын d өдөр')  }}</h6>
                              <img src="{{ asset($news->image) }}" class="image-header">
                          </a>
                          <div class="content">

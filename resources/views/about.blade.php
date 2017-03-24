@@ -266,9 +266,10 @@
             $.get("{{ url('sectornews') }}"+ "/" + $(this).val(), function( data ) {
                 $('.news-card').empty();
                 data.forEach(function(news){
+                    var date = new Date(news.created_at);
                    $( ".news-card" ).append( '<div class="card card-blog card-plain animated bounceInUp ">\
                         <a href="{{ url("news") }}/'+news.id+'" class="header">\
-                            <h6 class="card-date">'+ news.created_at +'</h6>\
+                            <h6 class="card-date">'+  date.getFullYear() + ' оны '  + (date.getMonth() + 1) + ' сарын ' + date.getDate() + ' өдөр' +'</h6>\
                             <img src="{{ asset('') }}' + news.image +'" class="image-header">\
                         </a>\
                         <div class="content">\

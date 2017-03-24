@@ -15,7 +15,7 @@
                             @else
                             @foreach($allnews as $news)
                             <div class="card card-blog card-plain card-allnews">
-                                <h6 class="card-date">{{$news->created_at}}</h6>
+                                <h6 class="card-date">{{ $news->created_at->format('Y оны m сарын d өдөр')  }}</h6>
                                 <a class="header" href="{{ url('news', $news->id) }}">
                                     <img src="{{ asset($news->image) }}" class="image-header">
                                 </a>

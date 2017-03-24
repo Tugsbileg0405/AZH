@@ -201,7 +201,7 @@
                                         <img class="card-img-top" src="{{ asset($news->image) }}">
                                         </a>
                                     <div class="card-block">
-                                        <h4 class="card-title">{{ $news->created_at }}</h4>
+                                        <h4 class="card-title">{{ $news->created_at->format('Y оны m сарын d өдөр')  }}</h4>
                                         <p class="card-text">{{ $news->title}}</p>
                                     </div>
                                     <a href="{{ url('news', $news->id) }}">
