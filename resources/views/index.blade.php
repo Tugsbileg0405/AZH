@@ -236,8 +236,8 @@
             <h2 class="description">Ерөнхийлөгчид</h2>
         </div>
         <ul class="nav nav-text" id="myTab" role="tablist">
-            @foreach($presidents as $president)
-            <li>
+            @foreach($presidents as $index => $president)
+            <li class="@if($loop->last) {{ 'active' }} @endif">
                 <a href="#testimonial{{ $president->id}}" role="tab" data-toggle="tab">
                     <div class="image-clients">
                         <img alt="..." src="{{ asset($president->photo_URL) }}" />
@@ -252,9 +252,9 @@
             </li>
             @endforeach
         </ul>
-        <div class="tab-content ">
-            @foreach($presidents as $president)
-            <div class="tab-pane" id="testimonial{{ $president->id}}">
+        <div class="tab-content">
+            @foreach($presidents as $index => $president)
+            <div class="tab-pane @if($loop->last) {{ 'active' }} @endif" id="testimonial{{ $president->id}}">
                 <p class="description ">
                     {{ $president->description }}
                 </p>
