@@ -5130,7 +5130,7 @@ body {
         display: none;
     }
     #comment {
-        margin-top: 76px;
+        margin-top: 46px;
     }
     #myCarousel .item {
         height: 500px !important;
@@ -5806,7 +5806,7 @@ body {
     #comment button {
         font-size: 18px;
         position: relative;
-        margin: 15px;
+        margin-left: 15px;
     }
 }
 
