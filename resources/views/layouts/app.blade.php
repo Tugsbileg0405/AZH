@@ -21,7 +21,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{asset('css/fonts/pe-icon-7-stroke.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightslider.css' )}}">
-    <link rel="stylesheet" href="{{ asset('css/lightGallery.css' )}}">
+    <link rel="stylesheet" href="{{ asset('css/lightslider.css' )}}">
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),

@@ -343,6 +343,7 @@
         //     })
             
           
+
             @if (session('substatus'))
         	$.notify({
             	icon: 'fa fa-check',
