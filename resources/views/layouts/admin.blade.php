@@ -7,7 +7,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Ардчилсан залуучуудын холбоо') }}</title>
 
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <!-- Animation library for notifications   -->
