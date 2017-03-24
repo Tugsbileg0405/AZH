@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public function news()
-    {
-        return $this->hasMany('App\News', 'news_category_id');
-    }
+	public function news()
+	    {
+		return $this->hasMany('App\News', 'news_category_id');
+	}
 }

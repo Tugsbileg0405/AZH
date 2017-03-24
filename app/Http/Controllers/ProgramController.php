@@ -9,26 +9,26 @@ use App\Programcomment;
 
 class ProgramController extends Controller
 {
-    public function index(){
-        $programNames = ProgramName::get();
-        return view('programs', [
-                'programNames' => $programNames,
-            ]);
-    }
-
-    public function getProgram($id){
-        $programName  = ProgramName::findOrFail($id);
-        return view('program', [
-                'programName' => $programName,
-            ]);
-    }
-
-    public function getAProgram($id){
-        $program  = Program::findOrFail($id);
-        return view('aprogram', [
-                'program' => $program,
-            ]);
-    }
-
-  
+	public function index(){
+		$programNames = ProgramName::get();
+		return view('programs', [
+		                'programNames' => $programNames,
+		            ]);
+	}
+	
+	public function getProgram($id){
+		$programName  = ProgramName::findOrFail($id);
+		return view('program', [
+		                'programName' => $programName,
+		            ]);
+	}
+	
+	public function getAProgram($id){
+		$program  = Program::findOrFail($id);
+		return view('aprogram', [
+		                'program' => $program,
+		            ]);
+	}
+	
+	
 }
