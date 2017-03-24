@@ -32,8 +32,8 @@ class AppController extends Controller
 			// 			$message->to($email);
 			// 			$message->subject('Ардчилсан залуучуудын холбоо');
 			//
-		}
-		);
+		// }
+		// );
 		return redirect('/')->with('substatus', 'Дагасанд баярлалаа!');
 	}
 }
