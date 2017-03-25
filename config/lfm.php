@@ -46,7 +46,7 @@ return [
     'files_folder_name'  => 'files',
 
     'shared_folder_name' => 'shares',
-    'thumb_folder_name'  => 'thumbs',
+    'thumb_folder_name'  => '\thumbs',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,8 +108,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'thumb_img_width' => 200,
-    'thumb_img_height' => 200,
+    'thumb_img_width' => 600,
+    'thumb_img_height' => 400,
 
     /*
     |--------------------------------------------------------------------------
