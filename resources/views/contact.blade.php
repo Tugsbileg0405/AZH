@@ -28,13 +28,13 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Таны цахим шуудан:</label>
-                                                    <input type="email"  name="email" value="" required placeholder="Цахим шуудангийн хаягаа оруулана уу" class="form-control form-control-warning form-control-plain">
+                                                    <input type="email" autocomplete="off" name="email" value="" required placeholder="Цахим шуудангийн хаягаа оруулана уу" class="form-control form-control-warning form-control-plain">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Таны илгээх захидал:</label>
-                                                    <textarea name="message" required class="form-control form-control-plain" placeholder="Та бидэнд илгээх захидалаа бичнэ үү" rows="8"></textarea>
+                                                    <textarea name="message" autocomplete="off" required class="form-control form-control-plain" placeholder="Та бидэнд илгээх захидалаа бичнэ үү" rows="8"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -51,7 +51,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Таны утас:</label>
-                                                    <input required type="text" name="phone" value="" placeholder="Та холбоо барих утасны дугаараа оруулана уу" class="form-control form-control-plain">
+                                                    <input required type="text" autocomplete="off" name="phone" value="" placeholder="Та холбоо барих утасны дугаараа оруулана уу" class="form-control form-control-plain">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -116,7 +116,7 @@
                 phone: {
                     validators: {
                         notEmpty: {
-                            message: 'Талбарын утгыг бөглөнө үү'
+                            message: '* Талбарын утгыг бөглөнө үү'
                         }
                     }
                 },

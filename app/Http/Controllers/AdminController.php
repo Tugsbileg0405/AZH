@@ -23,6 +23,9 @@ use App\Structure;
 use App\Program;
 use App\ProgramName;
 use App\Programcomment;
+use App\Subsriber;
+use Mail;
+use App\Mail\EmailReminder;
 
 class AdminController extends Controller
 {
@@ -32,14 +35,6 @@ class AdminController extends Controller
 		$this->middleware('auth:admin');
 	}
 	
-	
-	
-	
-	/**
-	* Display a listing of the resource.
-			     *
-			     * @return \Illuminate\Http\Response
-			     */
 	
 	public function getNews()
 			      {
@@ -788,5 +783,21 @@ class AdminController extends Controller
 		$p_comment->description = Input::get('comment');
 		$p_comment->save();
 		return redirect('admin/programcomment')->with('pcommentstatus', 'Амжилттай хадгалагдлаа!');
+	}
+
+	public function getMail(){
+		return view('admin.email');
+	}
+
+	public function sendMail(){
+		$title = Input::get('title');
+		$description = Input::get('description');
+		$emails = Subsriber::get()->toArray();
+		$user_emails = [];
+		foreach($emails as $email){
+			$user_emails[] = $email["email"];
+		}
+		Mail::to($user_emails)->queue(new EmailReminder($title,$description));
+		return redirect('admin/sendmail')->with('mailstatus', 'Амжилттай илгээлээ !');
 	}
 }

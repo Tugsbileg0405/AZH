@@ -11,7 +11,8 @@
 
 <body>
     <div class="column">
-        {{$email}} хэрэглэгч манай веб хуудсыг дагасанд баярлалаа.       
+        <h2>{{ $title }}</h2>
+        <p>{!! $description !!}</p> 
     </div>
 </body>
 

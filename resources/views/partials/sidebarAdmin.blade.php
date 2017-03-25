@@ -109,6 +109,12 @@
                         <p>Слайд</p>
                     </a>
                 </li>
+                 <li  class="{{ Request::is('admin/sendmail*') ? 'active' : '' }}">
+                    <a href="{{ url('admin/sendmail') }}">
+                        <i class="fa fa-sliders"></i>
+                        <p>И-мэйл илгээх</p>
+                    </a>
+                </li>
             </ul>
     	</div>
     </div>

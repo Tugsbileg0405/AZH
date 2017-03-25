@@ -95,10 +95,10 @@
                         
                         <nav>
                             <ul>
-                                <form action="{{ url('/subscribe') }}" id="subscribeform" method="POST">
+                                <form id="subscribeform">
                                      <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
                                     <li style="margin-bottom: 10px ">
-                                        <input type="email" required class="input-sbr " name="email" placeholder="Таны цахим шуудан: ">
+                                        <input type="email" autocomplete="off" required class="input-sbr " name="email" placeholder="Таны цахим шуудан: ">
                                     </li>
                                     <li>
                                         <button class="btn btn-white" type="submit">Бүртгүүлэх</button>
@@ -148,3 +148,45 @@
             </div>
         </div>
     </div>
+    @push('script')
+        <script> 
+            $(function(){
+                $('#subscribeform').on('submit',function(e){
+                    $.ajaxSetup({
+                        header:$('meta[name="_token"]').attr('content')
+                    })
+                    e.preventDefault(e);
+                        $.ajax({
+                        type:"POST",
+                        url:'{{ url("/subscribe") }}',
+                        data:$(this).serialize(),
+                        dataType: 'json',
+                        success: function(data){
+                            if(data.responseText === "success"){
+                                	$.notify({
+                                        icon: 'fa fa-check',
+                                        message: "Дагасанд баярлалаа."
+
+                                    },{
+                                        type: 'success',
+                                        timer: 1000
+                                    });
+                            }else{
+                                	$.notify({
+                                        icon: 'fa fa-info-circle',
+                                        message: "Та манай хуудсыг дагасан байна."
+
+                                    },{
+                                        type: 'info',
+                                        timer: 1000
+                                    });
+                            }
+                        },
+                        error: function(data){
+
+                        }
+                    })
+                    });
+                });
+        </script>
+    @endpush

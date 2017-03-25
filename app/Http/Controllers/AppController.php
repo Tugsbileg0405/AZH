@@ -10,6 +10,7 @@ use App\ProgramName;
 use App\Programcomment;
 use Mail;
 use Illuminate\Support\Facades\Input;
+use App\Subsriber;
 
 class AppController extends Controller
 {
@@ -19,21 +20,27 @@ class AppController extends Controller
 		$slides = Slide::get();
 		$latestnews = News::orderBy('created_at', 'desc')->take(3)->get();
 		return view('index', [
-		            'presidents' => $presidents,
-		            'latestnews' => $latestnews,
-		            'slides' => $slides,
-		            'ProgramNames' => $ProgramNames,
-		        ]);
+				    'presidents' => $presidents,
+				    'latestnews' => $latestnews,
+				    'slides' => $slides,
+				    'ProgramNames' => $ProgramNames,
+				]);
 	}
 	
 	public function createSubscribe(){
 		$email = Input::get('email');
-		// 		Mail::send('mail', ['email' => $email], function($message) use ($email) {
-			// 			$message->to($email);
-			// 			$message->subject('Ардчилсан залуучуудын холбоо');
-			//
-		// }
-		// );
-		return redirect('/')->with('substatus', 'Дагасанд баярлалаа!');
+		$message = "";
+		$user = Subsriber::where('email', '=', $email)->first();
+		if ($user === null) {
+			$subriber = new Subsriber;
+			$subriber->email = $email;
+			$subriber->save();
+			$message = "success";
+	    }
+		else {
+			$message = "failed";
+		}
+		
+		return response()->json(['responseText' => $message], 200);
 	}
 }

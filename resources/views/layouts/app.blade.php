@@ -16,9 +16,9 @@
     <link href="{{asset('css/gaia.css')}}" rel="stylesheet" >
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/bootstrapValidator.min.css')}}" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet ' type='text/css '>
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{asset('css/fonts/pe-icon-7-stroke.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/lightslider.css' )}}">
     <link rel="stylesheet" href="{{ asset('css/lightslider.css' )}}">
