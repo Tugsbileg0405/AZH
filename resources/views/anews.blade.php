@@ -18,7 +18,7 @@
                                     <img src="{{ asset($news->image) }}" class="image-header">
                                 </a>
                                 <div class="content">
-                                    <p class="text-gray">{!! $news->content !!}</p>
+                                    {!! $news->content !!}
                                 </div>
                             </div>
                         </div>

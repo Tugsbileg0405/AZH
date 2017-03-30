@@ -11,14 +11,13 @@
                                 <h4 class="title">Танилцуулга</h4>
                             </div>
                              <div class="content">
-                                <form method="POST" action="{{ url('/admin/intro') }}">
+                                <form method="POST" id="myform" action="{{ url('/admin/intro') }}">
                                     <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Контент</label>
-                                                <textarea rows="15"  class="form-control my-editor border-input" name="description" placeholder="Контентоо оруулна уу...">
-                                                </textarea>
+                                                <textarea rows="15"  class="form-control my-editor border-input" name="description" placeholder="Контентоо оруулна уу...">@if(!$intro->isEmpty()){{$intro[0]->description}}@endif</textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -39,9 +38,15 @@
 @push('script')
 	<script type="text/javascript">
     	$(document).ready(function(){
+             $('#myform').validator().on('submit', function (e) {
+                if (!e.isDefaultPrevented()) {
+                    $("body").loading();
+                }
+            })
             @if (session('introstatus'))
+            $("body").loading('stop');
         	$.notify({
-            	icon: 'ti-check',
+            	icon: 'fa fa-check',
             	message: " {{ session('introstatus') }}"
 
             },{

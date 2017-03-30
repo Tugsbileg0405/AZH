@@ -99,6 +99,10 @@ Route::prefix('admin')->group(function(){
 	Route::get('/presidents', 'AdminController@getPresidents')->name('admin.presidents');
 	Route::get('/intro', 'AdminController@getIntro')->name('admin.intro');
 	Route::post('/intro', 'AdminController@createIntro')->name('admin.createintro');
+	Route::get('/vow', 'AdminController@getvow')->name('admin.getvow');
+	Route::post('/vow', 'AdminController@createvow')->name('admin.createvow');
+	Route::get('/rule', 'AdminController@getrule')->name('admin.getrule');
+	Route::post('/rule', 'AdminController@createrule')->name('admin.createrule');
 	Route::get('/slide', 'AdminController@getSlide')->name('admin.getSlide');
 	Route::post('/slide', 'AdminController@createSlide')->name('admin.createSlide');
 	Route::get('/sector', 'AdminController@getSectorInfo')->name('admin.getSectorInfo');
@@ -117,5 +121,13 @@ Route::prefix('admin')->group(function(){
 	Route::post('/programs', 'AdminController@createprogram')->name('admin.createprogram');
 	Route::get('/sendmail', 'AdminController@getMail')->name('admin.getMail');
     Route::post('/sendmail', 'AdminController@sendMail')->name('admin.sendMail');
+	Route::get('/options', 'AdminController@getoptions')->name('admin.getoptions');
+	Route::post('/options/{id}', 'AdminController@createoptions')->name('admin.createoptions');
+
+	Route::post('/storephoto/{x}/{y}', 'AdminController@storePhoto')->name('admin.storePhoto');
+	Route::post('/storeaphoto/{x}/{y}', 'AdminController@storeAPhoto')->name('admin.storeAPhoto');
+	Route::post('/deletephoto', 'AdminController@destroyPhoto')->name('admin.destroyPhoto');
+	Route::get('/fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'AdminController@getfile']);
+    Route::post('/fileentry/add',[ 'as' => 'addentry', 'uses' => 'AdminController@addfile']);
 }
 );

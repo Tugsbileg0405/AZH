@@ -11,6 +11,7 @@ use App\Programcomment;
 use Mail;
 use Illuminate\Support\Facades\Input;
 use App\Subsriber;
+use App\Options;
 
 class AppController extends Controller
 {
@@ -18,12 +19,18 @@ class AppController extends Controller
 		$presidents = President::get();
 		$ProgramNames = ProgramName::get();
 		$slides = Slide::get();
+		$sectors = Options::findOrFail(1);
+		$members = Options::findOrFail(2);
+		$projects = Options::findOrFail(3);
 		$latestnews = News::orderBy('created_at', 'desc')->take(3)->get();
 		return view('index', [
 				    'presidents' => $presidents,
 				    'latestnews' => $latestnews,
 				    'slides' => $slides,
 				    'ProgramNames' => $ProgramNames,
+					'sectors' => $sectors,
+					'members' => $members,
+					'projects' => $projects,
 				]);
 	}
 	

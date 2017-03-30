@@ -40,22 +40,33 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
+                                      <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                 <label>Зураг:</label>
-                                                <div class="input-group">
-                                                    <span class="input-group-btn">
-                                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-info btn-fill ">
-                                                        <i class="fa fa-picture-o"></i> Сонгох
-                                                        </a>
-                                                    </span>
-                                                    <input id="thumbnail" value="{{$Program->image}}" class="form-control border-input"  type="text" name="filepath">
-                                                </div>
-                                                <img id="holder" style="margin-top:15px;max-height:100px;">
+                                                <label>Зураг</label>
+                                                <input type="file" name="file" style="display: none">
                                             </div>
+                                            <div class="photos">
+                                                <div class="browse">
+                                                    <i class="fa fa-image fa-3x" aria-hidden="true"></i>
+                                                    <div class="wait">
+                                                        <div class="loader"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="result">
+                                                    <div class="photo">
+                                                        <img src="{{ asset($Program->image) }}">
+                                                        <input type="hidden" name="photo" value="{{ $Program->image }}">
+                                                        <i class="fa fa-close fa-4x" aria-hidden="true"></i>
+                                                        <div class="wait">
+                                                            <div class="loader"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p class="warning">* 600x400 хэмжээтэй зураг тохиромжтой.</p>
                                         </div>
-                                    </div>  
+                                    </div>
 
                                       <div class="row">
                                         <div class="col-md-12">
@@ -73,7 +84,7 @@
 
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Нэмэх</button>
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Засах</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
@@ -90,9 +101,14 @@
 	<script type="text/javascript">
         $('#lfm').filemanager('image');
     	$(document).ready(function(){
+            $( "#myform" ).submit(function( event ) {
+                $("body").loading();
+            });
+
             @if (session('status'))
+            $("body").loading('stop');
         	$.notify({
-            	icon: 'ti-check',
+            	icon: 'fa fa-check',
             	message: " {{ session('status') }}"
 
             },{
@@ -101,5 +117,39 @@
             });
            @endif
     	});
+
+          var photos = $('.photos');
+            var result = $('.result');
+            var browse = $('.browse');
+            var input = $('input[name=file]');
+            browse.click(function() {
+                input.click();
+            });
+            input.change(function() {
+                browse.find('.fa').hide();
+                browse.find('.wait').show();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url("admin/storeaphoto/600/400") }}',
+                    data: new FormData(input.closest('form')[0]),
+                    contentType: false,
+                    processData: false,
+                }).done(function(data) {
+                    input.val(null);
+                    browse.find('.fa').show();
+                    browse.find('.wait').hide();
+                    result.html(data);
+                }).fail(function() {
+                    browse.find('.fa').show();
+                    browse.find('.wait').hide();
+                });
+            });
+            $(document).on('click', '.photo .fa', function() {
+                var photo = $(this).closest('.photo');
+                var path = photo.find('input').val();
+                photo.find('.fa').hide();
+                photo.find('.wait').show();
+                photo.remove();
+            });
 	</script>
 @endpush

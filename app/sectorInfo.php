@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class sectorInfo extends Model
 {
-    public function sector()
-    {
-        return $this->belongsTo('App\Location', 'location_id');
-    }
+    public function province()
+	    {
+		return $this->belongsTo('App\Province', 'location_id');
+	}
 }

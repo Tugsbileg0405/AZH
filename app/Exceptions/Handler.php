@@ -5,6 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -42,9 +45,29 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return \Illuminate\Http\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Exception $e)
     {
-        return parent::render($request, $exception);
+         if($this->isHttpException($e)){
+            switch ($e->getStatusCode()) {
+                case '404':
+                            \Log::error($e);
+                        return \Response::view('errors.404');
+                break;
+
+                case '500':
+                    \Log::error($exception);
+                        return \Response::view('errors.500');   
+                break;
+
+                default:
+                    return $this->renderHttpException($e);
+                break;
+            }
+        }
+        else
+        {
+            return parent::render($request, $e);
+        }
     }
 
     /**
@@ -73,4 +96,6 @@ class Handler extends ExceptionHandler
 
         return redirect()->guest(route($login));
     }
+
+  
 }

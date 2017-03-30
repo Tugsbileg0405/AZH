@@ -26,7 +26,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Контент</label>
-                                        <textarea rows="5" class="form-control my-editor border-input" required name="description" placeholder="Контентоо оруулна уу..."></textarea>
+                                        <textarea rows="5" class="form-control my-editor border-input" name="description" placeholder="Контентоо оруулна уу..."></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -49,6 +49,7 @@
 	<script type="text/javascript">
         $('#lfm').filemanager('image');
          $('#myform').bootstrapValidator({
+              
              fields: {
                  title: {
                      validators: {
@@ -66,8 +67,16 @@
                  },
              }
          });
+        
+        $('#myform').validator().on('submit', function (e) {
+            if (!e.isDefaultPrevented()) {
+                $("body").loading();
+            }
+        })
+
     	$(document).ready(function(){
             @if (session('mailstatus'))
+            $("body").loading('stop');
         	$.notify({
             	icon: 'fa fa-check',
             	message: " {{ session('mailstatus') }}"

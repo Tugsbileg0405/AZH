@@ -8,7 +8,7 @@
                 <div class="google-map big-map" style="height: 640px">
                 </div>
                 @foreach($locations as $location)
-                <div class="locations" data-lat="{{ $location->latitude }}" data-lng="{{ $location->longitude }}" data-cname="{{ $location->c_person_name }}" data-cemail="{{ $location->c_person_email }}" data-cphone="{{ $location->c_person_phone }}"></div>
+                <div class="locations" data-lat="{{ $location->province->latitude }}" data-lng="{{ $location->province->longitude }}" data-cname="{{ $location->c_person_name }}" data-cemail="{{ $location->c_person_email }}" data-cphone="{{ $location->c_person_phone }}" data-cfacebook="{{ $location->c_person_facebook }}" data-information="{{ $location->information }}"></div>
                 @endforeach
             </div>
         </div>

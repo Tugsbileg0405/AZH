@@ -18,6 +18,6 @@ class News extends Model
 	
 	public function sector()
 	    {
-		return $this->belongsTo('App\Location', 'location_id');
+		return $this->belongsTo('App\Province', 'location_id');
 	}
 }

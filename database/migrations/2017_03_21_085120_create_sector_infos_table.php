@@ -16,7 +16,7 @@ class CreateSectorInfosTable extends Migration
         Schema::create('sector_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('description')->nullable()->default(null);;
+            $table->text('description')->nullable()->default(null);
             $table->string('location_id');
             $table->timestamps();
         });

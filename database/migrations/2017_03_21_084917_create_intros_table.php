@@ -15,7 +15,7 @@ class CreateIntrosTable extends Migration
     {
         Schema::create('intros', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('description')->nullable()->default(null);;
+            $table->text('description')->nullable()->default(null);
             $table->timestamps();
         });
     }

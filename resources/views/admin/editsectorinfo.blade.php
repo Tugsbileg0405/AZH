@@ -39,8 +39,8 @@
                                                 <label>Салбарын байрлал:</label>
                                                 <select class="form-control" required name="location">
                                                     <option value="">Cалбараас сонгоно уу</option>
-                                                    @foreach($locations as $location)
-                                                    <option value="{{ $location->id }}" {{ $sectorInfo->location_id == $location->id ? 'selected' : '' }}>{{ $location->name }}</option>
+                                                    @foreach($provinces as $province)
+                                                    <option value="{{ $province->id }}" {{ $sectorInfo->location_id == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
                                                     @endforeach
                                             </select>
                                             </div>
@@ -48,7 +48,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Нэмэх</button>
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Засах</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
@@ -64,10 +64,18 @@
 @push('script')
 	<script type="text/javascript">
         $('#lfm').filemanager('image');
+
+        $('#myform').validator().on('submit', function (e) {
+                if (!e.isDefaultPrevented()) {
+                    $("body").loading();
+                }
+        })
+
     	$(document).ready(function(){
+            $("body").loading('stop');
             @if (session('status'))
         	$.notify({
-            	icon: 'ti-check',
+            	icon: 'fa fa-check',
             	message: " {{ session('status') }}"
 
             },{

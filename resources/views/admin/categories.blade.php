@@ -150,16 +150,22 @@
                             })
                         }
 
+            $('#myform').validator().on('submit', function (e) {
+                if (!e.isDefaultPrevented()) {
+                    $("body").loading();
+                }
+            })
 
              @if (session('categorytstatus'))
-        	$.notify({
-            	icon: 'fa fa-check',
-            	message: " {{ session('categorytstatus') }}"
-
-            },{
-                type: 'success',
-                timer: 2000
-            });
+             $("body").loading('stop');
+        	 $.notify({
+             	icon: 'fa fa-check',
+             	message: " {{ session('categorytstatus') }}"
+ 
+             },{
+                 type: 'success',
+                 timer: 2000
+             });
            @endif
     </script>
 @endpush

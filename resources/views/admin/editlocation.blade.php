@@ -11,64 +11,27 @@
                         <h4 class="title">Мэдээ засах</h4>
                     </div>
                     <div class="content">
-                       <form method="POST" id="myform" action="{{ url('/admin/location') }}">
+                       <form method="POST" id="myform" action="{{ url('/admin/location/edit',$Location->id) }}">
                                    <input name="_token" type="hidden" value="{!! csrf_token() !!}" />
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Аймаг/Дүүрэг нэр:</label>
-                                                  <select class="form-control" required name='name'>
+                                                  <select class="form-control" id="location" required name='name'>
                                                         <option value="">Аймаг/Дүүрэг нэр</option>
-                                                        <option value="Улаанбаатар">Улаанбаатар</option>
-                                                        <option value="Багануур">Багануур</option>
-                                                        <option value="Багахангай">Багахангай</option>
-                                                        <option value="Баянгол">Баянгол</option>
-                                                        <option value="Баянзүрх">Баянзүрх</option>
-                                                        <option value="Налайх">Налайх</option>
-                                                        <option value="Сонгинохайрхан">Сонгинохайрхан</option>
-                                                        <option value="Сүхбаатар">Сүхбаатар</option>
-                                                        <option value="Хан-Уул">Хан-Уул</option>
-                                                        <option value="Чингэлтэй">Чингэлтэй</option>
-                                                        <option value="Архангай">Архангай</option>
-                                                        <option value="Баян-Өлгий">Баян-Өлгий</option>
-                                                        <option value="Баянхонгор">Баянхонгор</option>
-                                                        <option value="Булган">Булган</option>
-                                                        <option value="Говь-Алтай">Говь-Алтай</option>
-                                                        <option value="Говьсүмбэр">Говьсүмбэр</option>
-                                                        <option value="Дархан-Уул">Дархан-Уул</option>
-                                                        <option value="Дорноговь">Дорноговь</option>
-                                                        <option value="Дорнод">Дорнод</option>
-                                                        <option value="Дундговь">Дундговь</option>
-                                                        <option value="Завхан">Завхан</option>
-                                                        <option value="Орхон">Орхон</option>
-                                                        <option value="Өвөрхангай">Өвөрхангай</option>
-                                                        <option value="Өмнөговь">Өмнөговь</option>
-                                                        <option value="Сүхбаатар">Сүхбаатар</option>
-                                                        <option value="Сэлэнгэ">Сэлэнгэ</option>
-                                                        <option value="Төв">Төв</option>
-                                                        <option value="Увс">Увс</option>
-                                                        <option value="Ховд">Ховд</option>
-                                                        <option value="Хөвсгөл">Хөвсгөл</option>
-                                                        <option value="Хэнтий">Хэнтий</option>
+                                                        @foreach($provinces as $province)
+                                                        <option value="{{ $province->id }}" {{ $Location->province_id == $province->id ? 'selected' : '' }}>{{ $province->name }}</option>
+                                                        @endforeach
                                                   </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                 <label>Байршил:</label>
-                                                 <div id="map" style="height:500px"></div>
-                                                 <input type="hidden" value="47.913138" name="lat" id="lat">
-                                                 <input type="hidden" value="106.920123" name="lon" id="lon">
-                                            </div>
-                                        </div>
-                                    </div>
+                                  
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                  <label>Холбогдох хүний нэр:</label>
-                                                <input type="text" required class="form-control border-input" name='cpersonname' placeholder="Холбогдох хүний нэр">
+                                                <input type="text" required class="form-control border-input" name='cpersonname' value="{{$Location->c_person_name}}" placeholder="Холбогдох хүний нэр">
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +40,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                  <label>Холбогдох хүний дугаар:</label>
-                                                <input type="text" required class="form-control border-input" name='cpersonphone' placeholder="Холбогдох хүний дугаар">
+                                                <input type="text" required class="form-control border-input" name='cpersonphone' value="{{$Location->c_person_phone}}" placeholder="Холбогдох хүний дугаар">
                                             </div>
                                         </div>
                                     </div>
@@ -86,13 +49,31 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                  <label>Холбогдох хүний и-мэйл:</label>
-                                                <input type="email" class="form-control border-input" required name='cpersonemail' placeholder="Холбогдох хүний и-мэйл">
+                                                <input type="email" class="form-control border-input" required name='cpersonemail' value="{{$Location->c_person_email}}" placeholder="Холбогдох хүний и-мэйл">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                 <label>Facebook хаяг:</label>
+                                                <input type="text" class="form-control border-input"  name='cpersonfacebook' placeholder="Facebook хаяг" value="{{$Location->c_person_facebook}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                 <label>Нэмэлт мэдээлэл:</label>
+                                                <textarea rows="5" class="form-control border-input"  name='information' placeholder="Нэмэлт мэдээлэл">{{$Location->information}}</textarea>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Нэмэх</button>
+                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Засах</button>
                                     </div>
                                     <div class="clearfix"></div>
                                 </form>
@@ -106,35 +87,18 @@
 @endsection
 
 @push('script')
-   <script async defer 
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAChBN0MVMVMizgvWhVZBFZ3afH4xWNGhQ&sensor=false&libraries=places&callback=initMap">
-    </script>
 	<script type="text/javascript">
         $('#lfm').filemanager('image');
-
-           function initMap() {
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 10,
-                    center: { lat: 47.913138, lng: 106.920123 },
-                });
-
-                marker = new google.maps.Marker({
-                        position: { lat: 47.913138, lng: 106.920123 },
-                        map: map                    
-                })
-
-                google.maps.event.addListener(map, "click", function (e) {
-                    var lat = e.latLng.lat();
-                    var lon = e.latLng.lng();
-                    marker.setPosition(new google.maps.LatLng(lat, lon));
-                    $('#lat').val(lat);
-                    $('#lon').val(lon);
-                });
-
     	$(document).ready(function(){
+
+            $( "#myform" ).submit(function( event ) {
+                $("body").loading();
+            });
+
             @if (session('status'))
+            $("body").loading('stop');
         	$.notify({
-            	icon: 'ti-check',
+            	icon: 'fa fa-check',
             	message: " {{ session('status') }}"
 
             },{

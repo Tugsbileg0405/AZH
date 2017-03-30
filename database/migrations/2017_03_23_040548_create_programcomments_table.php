@@ -17,7 +17,7 @@ class CreateProgramcommentsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('subtitle');
-            $table->text('description')->nullable()->default(null);;
+            $table->text('description')->nullable()->default(null);
             $table->text('imageURL')->nullable()->default(null);
             $table->integer('program_id');
             $table->timestamps();

@@ -35,9 +35,11 @@
                                                     <tr role="row">
                                                         <th>ID</th>
                                                         <th>Салбарын нэр</th>
-                                                        <th>Холбогдох хүний нэр</th>
-                                                        <th>Холбогдох хүний дугаар</th>
-                                                        <th>Холбогдох хүний и-мэйл</th>
+                                                        <th>Тэргүүний нэр</th>
+                                                        <th>Утасны дугаар</th>
+                                                        <th>И-мэйл</th>
+                                                        <th>Facebook хаяг</th>
+                                                        <th>Нэмэлт мэдээлэл</th>
                                                         <th>Огноо</th>
                                                         <th>Засварлах/Устгах</th>
                                                     </tr>
@@ -46,9 +48,11 @@
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Салбарын нэр</th>
-                                                        <th>Холбогдох хүний нэр</th>
-                                                        <th>Холбогдох хүний дугаар</th>
-                                                        <th>Холбогдох хүний и-мэйл</th>
+                                                        <th>Тэргүүний нэр</th>
+                                                        <th>Утасны дугаар</th>
+                                                        <th>И-мэйл</th>
+                                                        <th>Facebook хаяг</th>
+                                                        <th>Нэмэлт мэдээлэл</th>
                                                         <th>Огноо</th>
                                                         <th>Засварлах/Устгах</th>
                                                     </tr>
@@ -83,37 +87,9 @@
                                                 <label>Аймаг/Дүүрэг нэр:</label>
                                                   <select class="form-control" required name='name'>
                                                         <option value="">Аймаг/Дүүрэг нэр</option>
-                                                        <option value="Улаанбаатар">Улаанбаатар</option>
-                                                        <option value="Багануур">Багануур</option>
-                                                        <option value="Багахангай">Багахангай</option>
-                                                        <option value="Баянгол">Баянгол</option>
-                                                        <option value="Баянзүрх">Баянзүрх</option>
-                                                        <option value="Налайх">Налайх</option>
-                                                        <option value="Сонгинохайрхан">Сонгинохайрхан</option>
-                                                        <option value="Сүхбаатар">Сүхбаатар</option>
-                                                        <option value="Хан-Уул">Хан-Уул</option>
-                                                        <option value="Чингэлтэй">Чингэлтэй</option>
-                                                        <option value="Архангай">Архангай</option>
-                                                        <option value="Баян-Өлгий">Баян-Өлгий</option>
-                                                        <option value="Баянхонгор">Баянхонгор</option>
-                                                        <option value="Булган">Булган</option>
-                                                        <option value="Говь-Алтай">Говь-Алтай</option>
-                                                        <option value="Говьсүмбэр">Говьсүмбэр</option>
-                                                        <option value="Дархан-Уул">Дархан-Уул</option>
-                                                        <option value="Дорноговь">Дорноговь</option>
-                                                        <option value="Дорнод">Дорнод</option>
-                                                        <option value="Дундговь">Дундговь</option>
-                                                        <option value="Завхан">Завхан</option>
-                                                        <option value="Орхон">Орхон</option>
-                                                        <option value="Өвөрхангай">Өвөрхангай</option>
-                                                        <option value="Өмнөговь">Өмнөговь</option>
-                                                        <option value="Сүхбаатар">Сүхбаатар</option>
-                                                        <option value="Сэлэнгэ">Сэлэнгэ</option>
-                                                        <option value="Төв">Төв</option>
-                                                        <option value="Увс">Увс</option>
-                                                        <option value="Ховд">Ховд</option>
-                                                        <option value="Хөвсгөл">Хөвсгөл</option>
-                                                        <option value="Хэнтий">Хэнтий</option>
+                                                        @foreach($provinces as $province)
+                                                        <option value="{{$province->id}}">{{$province->name}}</option>
+                                                        @endforeach
                                                   </select>
                                             </div>
                                         </div>
@@ -121,18 +97,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                 <label>Байршил:</label>
-                                                 <div id="map" style="height:500px"></div>
-                                                 <input type="hidden" value="47.913138" name="lat" id="lat">
-                                                 <input type="hidden" value="106.920123" name="lon" id="lon">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                 <label>Холбогдох хүний нэр:</label>
-                                                <input type="text" required class="form-control border-input" name='cpersonname' placeholder="Холбогдох хүний нэр">
+                                                 <label>Тэргүүний нэр:</label>
+                                                <input type="text" required class="form-control border-input" name='cpersonname' placeholder="Тэргүүний нэр">
                                             </div>
                                         </div>
                                     </div>
@@ -140,8 +106,26 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                 <label>Холбогдох хүний дугаар:</label>
-                                                <input type="text" required class="form-control border-input" name='cpersonphone' placeholder="Холбогдох хүний дугаар">
+                                                 <label>Утасны дугаар:</label>
+                                                <input type="text" required class="form-control border-input" name='cpersonphone' placeholder="Утасны дугаар">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                 <label>И-мэйл:</label>
+                                                <input type="email" class="form-control border-input" required name='cpersonemail' placeholder="И-мэйл">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                 <label>Facebook хаяг:</label>
+                                                <input type="text" class="form-control border-input"  name='cpersonfacebook' placeholder="Facebook хаяг">
                                             </div>
                                         </div>
                                     </div>
@@ -149,8 +133,8 @@
                                      <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                 <label>Холбогдох хүний и-мэйл:</label>
-                                                <input type="email" class="form-control border-input" required name='cpersonemail' placeholder="Холбогдох хүний и-мэйл">
+                                                 <label>Нэмэлт мэдээлэл:</label>
+                                                <textarea rows="5" class="form-control border-input"  name='information' placeholder="Нэмэлт мэдээлэл"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -168,9 +152,6 @@
 @endsection
 
 @push('script')
-    <script async defer 
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAChBN0MVMVMizgvWhVZBFZ3afH4xWNGhQ&sensor=false&libraries=places&callback=initMap">
-    </script>
    <script type="text/javascript">
             $('#myform').bootstrapValidator({
                 fields: {
@@ -219,10 +200,12 @@
                     ajax: '{!! route('datatables.getalllocations') !!}',
                     columns: [
                         { data: 'id', name: 'id' },
-                        { data: 'name', name: 'name' },
+                        { data: 'province.name', name: 'province.name' },
                         { data: 'c_person_name', name: 'c_person_name' },
                         { data: 'c_person_phone', name: 'c_person_phone' },
                         { data: 'c_person_email', name: 'c_person_email' },
+                        { data: 'c_person_facebook', name: 'c_person_facebook' },
+                        { data: 'information', name: 'information' },
                         { data: 'created_at', name: 'created_at' },
                          {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]
@@ -254,34 +237,14 @@
                             })
                       }
 
+           $('#myform').validator().on('submit', function (e) {
+                if (!e.isDefaultPrevented()) {
+                    $("body").loading();
+                }
+            })
 
-                function initMap() {
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    zoom: 10,
-                    center: { lat: 47.913138, lng: 106.920123 },
-                });
-
-                marker = new google.maps.Marker({
-                        position: { lat: 47.913138, lng: 106.920123 },
-                        map: map                    
-                })
-
-                google.maps.event.addListener(map, "click", function (e) {
-                    var lat = e.latLng.lat();
-                    var lon = e.latLng.lng();
-                    marker.setPosition(new google.maps.LatLng(lat, lon));
-                    $('#lat').val(lat);
-                    $('#lon').val(lon);
-                });
-
-                $('#myModal').on('shown.bs.modal', function () {
-                    google.maps.event.trigger(map, "resize");
-                });
-            }
-
-          
-
-             @if (session('locationstatus'))
+            @if (session('locationstatus'))
+            $("body").loading('stop');
         	$.notify({
             	icon: 'fa fa-check',
             	message: " {{ session('locationstatus') }}"

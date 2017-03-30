@@ -14,12 +14,14 @@
     <link href="{{ asset('assets/css/animate.min.css') }}" rel="stylesheet"/>
     <link href="{{asset('css/bootstrapValidator.min.css')}}" rel="stylesheet">
     <!--  Paper Dashboard core CSS    -->
-     <link href="{{ asset('assets/css/paper-dashboard.css') }}" rel="stylesheet"/>
-     <link href="{{ asset('assets/css/sweetalert2.min.css') }}" rel="stylesheet"/>
-     <link href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/paper-dashboard.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/sweetalert2.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/bootstrap-treeview.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/jquery.loading.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/perfect-scrollbar.min.css') }}" rel="stylesheet"/>
     <!--  Fonts and icons     -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+    <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
@@ -54,13 +56,17 @@
     <script src="{{ asset('assets/js/bootstrap-notify.js') }}"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="{{ asset('assets/js/paper-dashboard.js') }}"></script>
+    <script src="{{ asset('assets/js/bootstrap-treeview.min.js') }}"></script>
     <script src="{{ asset('assets/js/sweetalert2.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
-     <script src="{{ asset('assets/js/demo.js') }}"></script>
+    <script src="{{ asset('assets/js/demo.js') }}"></script>
     <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('vendor/laravel-filemanager/js/lfm.js') }}"></script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script src="{{ asset('assets/js/jquery.loading.min.js') }}"></script>
+    <script src="{{ asset('assets/js/validator.min.js') }}"></script>
+    <script src="{{ asset('assets/js/perfect-scrollbar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/paper-dashboard.js') }}"></script>
     <script>
             var editor_config = {
                 path_absolute : "/AZH/public/",
@@ -96,7 +102,21 @@
             };
 
         tinymce.init(editor_config);
-</script>
+
+   </script>
+   <script>
+        @if($errors)
+            @foreach($errors->all() as $error)
+            $.notify({
+            	icon: 'fa fa-info',
+            	message: " {{$error}}"
+            },{
+                type: 'info',
+                timer: 2000
+            });
+            @endforeach
+        @endif
+   </script>
     @stack('script')
 </body>
 </html>

@@ -20,7 +20,7 @@ var burger_menu;
 var scroll_distance = 500;
 
 var map;
-$(document).ready(function() {
+$(document).ready(function () {
     BrowserDetect.init();
 
     if (BrowserDetect.browser == 'Explorer' && BrowserDetect.version <= 9) {
@@ -49,7 +49,7 @@ $(document).ready(function() {
     $navbar = $('.navbar[color-on-scroll]');
     scroll_distance = $navbar.attr('color-on-scroll') || 500;
 
-    $('.google-map').each(function() {
+    $('.google-map').each(function () {
         var lng = $(this).data('lng');
         var lat = $(this).data('lat');
         var centerLatlng = new google.maps.LatLng(46.934093, 102.588197);
@@ -63,19 +63,21 @@ $(document).ready(function() {
         map = new google.maps.Map(this, mapOptions);
     });
 
-    $('.locations').each(function() {
+    $('.locations').each(function () {
         var lng = $(this).data('lng');
         var lat = $(this).data('lat');
         var cname = $(this).data('cname');
         var cemail = $(this).data('cemail');
         var cphone = $(this).data('cphone');
-        gaia.initGoogleMaps(this, lat, lng, cname, cphone, cemail);
+        var cfacebook = $(this).data('cfacebook');
+        var information = $(this).data('information');
+        gaia.initGoogleMaps(this, lat, lng, cname, cphone, cemail, cfacebook, information);
     });
 
 });
 
 //activate collapse right menu when the windows is resized
-$(window).resize(function() {
+$(window).resize(function () {
     if ($(window).width() < 992) {
         gaia.initRightMenu();
         //gaia.checkResponsiveImage();
@@ -87,7 +89,7 @@ $(window).resize(function() {
     }
 });
 
-$(window).on('scroll', function() {
+$(window).on('scroll', function () {
 
     gaia.checkScrollForTransparentNavbar();
 
@@ -102,7 +104,7 @@ $(window).on('scroll', function() {
 
 });
 
-$('a[data-scroll="true"]').click(function(e) {
+$('a[data-scroll="true"]').click(function (e) {
     var scroll_target = $(this).data('id');
     var scroll_trigger = $(this).data('scroll');
 
@@ -120,31 +122,31 @@ gaia = {
     misc: {
         navbar_menu_visible: 0
     },
-    initRightMenu: function() {
+    initRightMenu: function () {
 
         if (!navbar_initialized) {
             $toggle = $('.navbar-toggle');
-            $toggle.click(function() {
+            $toggle.click(function () {
 
                 if (gaia.misc.navbar_menu_visible == 1) {
                     $('html').removeClass('nav-open');
                     gaia.misc.navbar_menu_visible = 0;
                     $('#bodyClick').remove();
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $toggle.removeClass('toggled');
                     }, 550);
 
                 } else {
-                    setTimeout(function() {
+                    setTimeout(function () {
                         $toggle.addClass('toggled');
                     }, 580);
 
                     div = '<div id="bodyClick"></div>';
-                    $(div).appendTo("body").click(function() {
+                    $(div).appendTo("body").click(function () {
                         $('html').removeClass('nav-open');
                         gaia.misc.navbar_menu_visible = 0;
                         $('#bodyClick').remove();
-                        setTimeout(function() {
+                        setTimeout(function () {
                             $toggle.removeClass('toggled');
                         }, 550);
                     });
@@ -159,7 +161,7 @@ gaia = {
 
     },
 
-    checkScrollForTransparentNavbar: debounce(function() {
+    checkScrollForTransparentNavbar: debounce(function () {
         if ($(document).scrollTop() > scroll_distance) {
             if (transparent) {
                 transparent = false;
@@ -173,8 +175,8 @@ gaia = {
         }
     }, 17),
 
-    checkScrollForParallax: debounce(function() {
-        $('.parallax').each(function() {
+    checkScrollForParallax: debounce(function () {
+        $('.parallax').each(function () {
             var $elem = $(this);
 
             if (isElementInViewport($elem)) {
@@ -189,8 +191,8 @@ gaia = {
 
     }, 6),
 
-    checkScrollForContentTransitions: debounce(function() {
-        $('.content-with-opacity').each(function() {
+    checkScrollForContentTransitions: debounce(function () {
+        $('.content-with-opacity').each(function () {
             var $content = $(this);
 
             if (isElementInViewport($content)) {
@@ -208,7 +210,7 @@ gaia = {
         });
     }, 6),
 
-    initGoogleMaps: function($elem, lat, lng, cname, cphone, cemail) {
+    initGoogleMaps: function ($elem, lat, lng, cname, cphone, cemail, cfacebook, information) {
 
         var myLatlng = new google.maps.LatLng(lat, lng);
         var marker = new google.maps.Marker({
@@ -216,16 +218,40 @@ gaia = {
             title: cname
         });
         marker.setMap(map);
+        var contentString = ""
+        if (information && cfacebook) {
+            contentString = '<div>' +
+                '<p><b>' + cname +
+                '</b></p>' +
+                '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> <tr> <td><i class="fa fa-facebook"></td> <td>' + cfacebook + '</td> </tr> <tr> <td><i class="fa fa-info"></td> <td>' + information + '</td> </tr></table>'
+            '</div>';
+        }
+        else if (information) {
+            contentString = '<div>' +
+                '<p><b>' + cname +
+                '</b></p>' +
+                '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> <tr> <td><i class="fa fa-info"></td> <td>' + information + '</td> </tr></table>'
+            '</div>';
+        }
+        else if (cfacebook) {
+            contentString = '<div>' +
+                '<p><b>' + cname +
+                '</b></p>' +
+                '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> <tr> <td><i class="fa fa-facebook"></td> <td>' + cfacebook + '</td> </tr></table>'
+            '</div>';
+        }
+        else {
+            contentString = '<div>' +
+                '<p><b>' + cname +
+                '</b></p>' +
+                '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> </table>'
+            '</div>';
+        }
 
-        var contentString = '<div>' +
-            '<p><b>' + cname +
-            '</b></p>' +
-            '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> </table>'
-        '</div>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-        marker.addListener('click', function() {
+        marker.addListener('click', function () {
             infowindow.open(map, marker);
         });
     },
@@ -239,11 +265,11 @@ gaia = {
 
 function debounce(func, wait, immediate) {
     var timeout;
-    return function() {
+    return function () {
         var context = this,
             args = arguments;
         clearTimeout(timeout);
-        timeout = setTimeout(function() {
+        timeout = setTimeout(function () {
             timeout = null;
             if (!immediate) func.apply(context, args);
         }, wait);
@@ -269,11 +295,11 @@ function isElementInViewport(elem) {
 
 
 var BrowserDetect = {
-    init: function() {
+    init: function () {
         this.browser = this.searchString(this.dataBrowser) || "Other";
         this.version = this.searchVersion(navigator.userAgent) || this.searchVersion(navigator.appVersion) || "Unknown";
     },
-    searchString: function(data) {
+    searchString: function (data) {
         for (var i = 0; i < data.length; i++) {
             var dataString = data[i].string;
             this.versionSearchString = data[i].subString;
@@ -283,7 +309,7 @@ var BrowserDetect = {
             }
         }
     },
-    searchVersion: function(dataString) {
+    searchVersion: function (dataString) {
         var index = dataString.indexOf(this.versionSearchString);
         if (index === -1) {
             return;

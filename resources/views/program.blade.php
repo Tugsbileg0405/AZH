@@ -16,7 +16,7 @@
                          @if($programName->programs)
                          <div class="container">
                              <div class="row">
-                                 @foreach($programName->programs as $program)
+                                 @foreach($programName->programs as $index => $program)
                                  <div class="col-md-6">
                                      <div class="project">
                                          <img src="{{ asset($program->image) }}">

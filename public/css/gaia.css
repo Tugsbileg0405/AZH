@@ -11,6 +11,35 @@
     /* Legacy iOS */
 }
 
+
+/**
+ * Include Roboto Condensed font in your project
+ * 
+ * Download Roboto Condensed ttf files from Google Fonts and place it in the same directory of this CSS file
+ * You can then use this font in your project by setting
+ * font-face: "Roboto Condensed", Helvetica, Arial, sans-serif;
+ *
+ * @author Mattia Migliorini (deshack)
+ * @license MIT
+ */
+
+
+/* Normal */
+
+@font-face {
+    font-family: "Roboto Condensed";
+    font-style: normal;
+    font-weight: 400;
+    src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), url("../fonts/RobotoCondensed-Regular.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: "Roboto Condensed";
+    font-style: italic;
+    font-weight: 400;
+    src: local('Roboto Condensed Italic'), local('RobotoCondensed-Italic'), url("../fonts/RobotoCondensed-Italic.ttf") format('truetype');
+}
+
 html {
     font-size: 14px;
     -ms-text-size-adjust: 100%;
@@ -58,6 +87,9 @@ body {
 ol,
 ul {
     list-style: none;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 h1,
@@ -202,6 +234,16 @@ a:hover {
 
 .footer-logo {
     background-color: #F5F5F5 !important;
+}
+
+.footer-logo .dem-title{
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top:8px;
+    font-stretch: condensed;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.54);
 }
 
 .text-primary {
@@ -485,6 +527,15 @@ body>.navbar-collapse a {
 .loading .loading-container p {
     font-size: 30px;
     margin-bottom: 30px;
+}
+
+.seeProgram {
+    height: 152px;
+}
+
+.seeProgram button {
+    position: absolute;
+    bottom: 0px;
 }
 
 
@@ -1621,6 +1672,42 @@ fieldset[disabled] .form-control {
     border-bottom: 2px solid #e30613;
 }
 
+.section-aprogram {
+    padding-top: 177px !important;
+    background-color: #f5f5f5;
+}
+
+.section-aprogram .title h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #28367b;
+}
+
+.section-white {
+    background-color: #f5f5f5;
+}
+
+.section-white p,
+.section-white li,
+.section-white th,
+.section-white td {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.56;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+.section-aprogram .title-area {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.12);
+    height: 36px;
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.section-aprogram .title-area .description {
+    color: rgba(0, 0, 0, 0.54);
+}
+
 .section-program {
     padding-top: 177px !important;
     background-color: #f5f5f5;
@@ -1972,7 +2059,10 @@ fieldset[disabled] .form-control {
     text-align: left;
 }
 
-.section-newspage .card .content .text-gray {
+.section-newspage .card .content p,
+.section-newspage .card .content li,
+.section-newspage .card .content th,
+.section-newspage .card .content td {
     font-size: 15px;
     font-weight: 300;
     line-height: 1.56;
@@ -3329,6 +3419,7 @@ fieldset[disabled] .form-control {
 .card .image-header,
 .card .header img {
     width: 100%;
+    max-height: 400px;
     border-radius: 4px 4px 0 0;
 }
 
@@ -4236,6 +4327,13 @@ fieldset[disabled] .form-control {
 }
 
 @media (max-width: 992px) {
+    .comments {
+        display: none;
+    }
+    .seeProgram {
+        height: 92px;
+        margin-top: 50px;
+    }
     .section-with-hover .project .over-area {
         opacity: 1;
         -webkit-transition: background 0.25s, opacity 0.25s 0.25s;
@@ -4361,8 +4459,8 @@ fieldset[disabled] .form-control {
         padding: 10px 0;
     }
     .slider-title {
-        height: 80px !important;
-        font-size: 40px !important;
+        height: 144px !important;
+        font-size: 48px !important;
     }
     .image-clients {
         margin: 15px auto;
@@ -4389,6 +4487,9 @@ fieldset[disabled] .form-control {
 }
 
 @media (max-width: 767px) {
+    .subprogram a:nth-last-child(1) {
+        display: none;
+    }
     .navbar .navbar-nav>li>a.btn-white {
         padding: 8px 0 26px 0;
         border: none;
@@ -4559,6 +4660,11 @@ fieldset[disabled] .form-control {
     }
     #headerCarousel .carousel-control.left {
         right: 85px !important
+    }
+    .slider-title {
+        height: 108px !important;
+        line-height: 1.03 !important;
+        font-size: 36px !important;
     }
 }
 
@@ -5357,6 +5463,9 @@ body {
     .navbar-default .navbar-nav>li>a:not(.btn):focus {
         color: #28367b;
     }
+    #headerCarousel {
+        height: 720px;
+    }
 }
 
 @media (max-width: 767px) {
@@ -5410,6 +5519,12 @@ body {
 }
 
 @media (max-width: 992px) {
+    #myCarousel .item {
+        height: 500px !important;
+    }
+    #myCarousel .item .slider-img {
+        min-height: 500px !important;
+    }
     .section-faq .box {
         max-width: 480px;
         margin: 0 auto;
@@ -5661,9 +5776,9 @@ body {
     font-weight: bold;
     line-height: 1;
     overflow: hidden;
-    height: 128px;
+    height: 192px;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     color: #28367b;
@@ -5946,7 +6061,7 @@ body {
 }
 
 .demo-gallery>ul>li a {
-    border: 3px solid #FFF;
+    border: 3px solid #f5f5f5;
     border-radius: 3px;
     display: block;
     overflow: hidden;
@@ -6133,6 +6248,11 @@ div[id^=map] div {
 }
 
 .about-content p {
+    font-size: 16px;
+    color: #777777;
+}
+
+.about-content li {
     font-size: 16px;
     color: #777777;
 }

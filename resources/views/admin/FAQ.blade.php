@@ -170,15 +170,22 @@
                             })
             }
 
-             @if (session('faqstatus'))
-        	$.notify({
-            	icon: 'fa fa-check',
-            	message: " {{ session('faqstatus') }}"
+            $('#myform').validator().on('submit', function (e) {
+                if (!e.isDefaultPrevented()) {
+                    $("body").loading();
+                }
+            })
 
-            },{
-                type: 'success',
-                timer: 2000
-            });
+             @if (session('faqstatus'))
+             $("body").loading('stop');
+        	 $.notify({
+             	icon: 'fa fa-check',
+             	message: " {{ session('faqstatus') }}"
+ 
+             },{
+                 type: 'success',
+                 timer: 2000
+             });
            @endif
     </script>
 @endpush

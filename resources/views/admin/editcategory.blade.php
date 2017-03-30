@@ -40,9 +40,15 @@
 	<script type="text/javascript">
         $('#lfm').filemanager('image');
     	$(document).ready(function(){
+
+            $( "#myform" ).submit(function( event ) {
+                $("body").loading();
+            });
+
             @if (session('status'))
+            $("body").loading('stop');
         	$.notify({
-            	icon: 'ti-check',
+            	icon: 'fa fa-check',
             	message: " {{ session('status') }}"
 
             },{

@@ -99,8 +99,8 @@
                                                 <label>Салбарын байрлал:</label>
                                                 <select class="form-control" required name="location">
                                                     <option value="">Cалбараас сонгоно уу</option>
-                                                    @foreach($locations as $location)
-                                                    <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                                    @foreach($provinces as $province)
+                                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
                                                     @endforeach
                                             </select>
                                             </div>
@@ -160,7 +160,7 @@
                     columns: [
                         { data: 'id', name: 'id' },
                         { data: 'title', name: 'title' },
-                        { data: 'sector.name', name: 'sector.name', orderable: false, searchable: false },
+                        { data: 'province.name', name: 'province.name' },
                         { data: 'created_at', name: 'created_at' },
                          {data: 'action', name: 'action', orderable: false, searchable: false}
                     ]
@@ -192,7 +192,14 @@
                             })
             }
 
+            $('#myform').validator().on('submit', function (e) {
+                if (!e.isDefaultPrevented()) {
+                    $("body").loading();
+                }
+            })
+
             @if (session('sectorstatus'))
+            $("body").loading('stop');
         	$.notify({
             	icon: 'fa fa-check',
             	message: " {{ session('sectorstatus') }}"

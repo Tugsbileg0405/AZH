@@ -15,12 +15,12 @@ class CreateLocationsTable extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('province_id');
             $table->string('c_person_name');
             $table->string('c_person_email');
             $table->string('c_person_phone');
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->string('c_person_facebook')->nullable()->default(null);;
+            $table->text('information')->nullable()->default(null);;
             $table->timestamps();
         });
     }
