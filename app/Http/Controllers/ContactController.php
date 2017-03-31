@@ -8,14 +8,17 @@ use Carbon\Carbon;
 use App\Location;
 use App\Faq;
 use App\Contact;
+use App\Province;
 
 class ContactController extends Controller
 {
 	public function index(){
-		$locations = Location::all();
+		$provinces = Province::all();
+		$location = Location::all();
 		$faqs = Faq::all();
 		return view('contact',[
-		            'locations' => $locations,
+		            'provinces' => $provinces,
+					'locations' => $location,
 		            'faqs' => $faqs,
 		        ]);
 	}

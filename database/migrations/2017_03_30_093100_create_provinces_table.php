@@ -65,14 +65,14 @@ class CreateProvincesTable extends Migration
 
         $Province = new \App\Province;
         $Province->name = 'Сүхбаатар';
-        $Province->latitude = 47.926400;
-        $Province->longitude = 106.816081;
+        $Province->latitude = 47.918412;
+        $Province->longitude = 106.915862;
         $Province->save();
 
         $Province = new \App\Province;
         $Province->name = 'Хан-Уул';
-        $Province->latitude = 47.926400;
-        $Province->longitude = 106.816081;
+        $Province->latitude = 47.897334;
+        $Province->longitude = 106.896598;
         $Province->save();
 
         $Province = new \App\Province;

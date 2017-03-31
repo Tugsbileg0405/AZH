@@ -42,5 +42,9 @@ class AboutController extends Controller{
 		$sectorInfoNews = News::where('location_id', $id)->orderBy('created_at', 'desc')->take(3)->get();
 		return $sectorInfoNews;
 	}
+
+	public function getfile($filename){
+		return response()->download('uploads/'.$filename);
+	}
 	
 }

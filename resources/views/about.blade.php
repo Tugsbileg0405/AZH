@@ -98,10 +98,16 @@
                                         @endif
                                     </h2>
                                     <div class="btn-group">
+                                        @if(!$rule->isEmpty())
+                                        @if($rule[0]->filename)
                                         <button class="btn">
+                                        <a href="{{url('fileentry/get',$rule[0]->file)}}">
                                             <i class="fa fa-download"></i>
                                             ТАТАЖ АВАХ
+                                         </a>
                                         </button>
+                                        @endif
+                                        @endif
                                         <button class="btn" onclick="printDiv('rule')">
                                             <i class="fa fa-print"></i> ХЭВЛЭХ
                                         </button>

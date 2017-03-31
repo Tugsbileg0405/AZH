@@ -35,9 +35,14 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label>Файл</label>
-                                                <input type="file" class="form-control border-input" id="file" name="file" value="@if(!$rule->isEmpty()){{ $rule[0]->file }} @endif">
-                                                <input type="hidden" name="filename" id="filename">
+                                                 <div class="fileUpload btn btn-info btn-fill">
+                                                    <span>Файл оруулах</span>
+                                                    <input type="file" name="file" id="uploadBtn" class="upload"/>
+                                                </div>
+                                                <input id="uploadFile" name="file" placeholder="Choose File"  value="@if(!$rule->isEmpty()){{ $rule[0]->original_filename }} @endif" disabled="disabled" />
+                                                <input type="text" style="display:none" id="filename" name="filename" value="@if(!$rule->isEmpty()){{ $rule[0]->file }} @endif">
+                                                <input type="text" style="display:none" id="originalfilename" name="originalfilename" value="@if(!$rule->isEmpty()){{ $rule[0]->original_filename }} @endif">
+                                                <input type="text" style="display:none" id="path" name="path" value="@if(!$rule->isEmpty()){{ $rule[0]->path_filename }} @endif">
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +90,7 @@
             });
            @endif
 
-            var input = $('input[name=file]');
+            var input = $('#uploadBtn');
          
             input.change(function() {
                 $.ajax({
@@ -95,10 +100,23 @@
                     contentType: false,
                     processData: false,
                 }).done(function(data) {
-                    $('#filename').val(data);
-                }).fail(function() {
+                    $('#filename').val(data[1]);
+                    $('#originalfilename').val(data[0]);
+                    $('#path').val(data[2]);
+                    document.getElementById("uploadFile").value = data[0];
+                }).fail(function(error) {
+                   $.notify({
+                        icon: 'fa fa-exclamation',
+                        message: " Алдаа гарлаа дахин оруулна уу."
+
+                    },{
+                        type: 'danger',
+                        timer: 500
+                    });
                 });
             });
+
+          
     	});
 	</script>
 @endpush

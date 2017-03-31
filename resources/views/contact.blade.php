@@ -42,8 +42,8 @@
                                                     <label>Илгээх салбар сонгох</label>
                                                     <select class="form-control" name="location" required>
                                                             <option value="">Та МЗХ-ны салбараас сонгоно уу</option>
-                                                            @foreach($locations as $location)
-                                                            <option value="{{ $location->id }}">{{ $location->name }}</option>
+                                                            @foreach($provinces as $provinces)
+                                                            <option value="{{ $provinces->id }}">{{ $provinces->name }}</option>
                                                             @endforeach
                                                     </select>
                                                 </div>

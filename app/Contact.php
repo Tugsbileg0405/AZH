@@ -8,7 +8,7 @@ class Contact extends Model
 {
     public function sector()
     {
-        return $this->belongsTo('App\Location', 'location');
+        return $this->belongsTo('App\Province', 'location');
     }
 
 }

@@ -34,6 +34,7 @@ Route::get('/programs/{id}', 'ProgramController@getProgram')->name('getProgram')
 Route::get('/program/{id}', 'ProgramController@getAProgram')->name('getAProgram');
 Route::get('/sector/{id}', 'AboutController@getSector')->name('getSector');
 Route::get('/sectornews/{id}', 'AboutController@getSectorNews')->name('getSectorNews');
+Route::get('/fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'AboutController@getfile']);
 
 Route::prefix('admin')->group(function(){
 	Route::get('/', 'AdminController@index')->name('admin.dashboard');
@@ -127,7 +128,6 @@ Route::prefix('admin')->group(function(){
 	Route::post('/storephoto/{x}/{y}', 'AdminController@storePhoto')->name('admin.storePhoto');
 	Route::post('/storeaphoto/{x}/{y}', 'AdminController@storeAPhoto')->name('admin.storeAPhoto');
 	Route::post('/deletephoto', 'AdminController@destroyPhoto')->name('admin.destroyPhoto');
-	Route::get('/fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'AdminController@getfile']);
     Route::post('/fileentry/add',[ 'as' => 'addentry', 'uses' => 'AdminController@addfile']);
 }
 );

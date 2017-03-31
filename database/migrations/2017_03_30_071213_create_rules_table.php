@@ -17,6 +17,8 @@ class CreateRulesTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('file')->nullable()->default(null);
+            $table->text('original_filename')->nullable()->default(null);
+            $table->text('path_filename')->nullable()->default(null);
             $table->string('subtitle')->nullable()->default(null);
             $table->text('description')->nullable()->default(null);;
             $table->timestamps();

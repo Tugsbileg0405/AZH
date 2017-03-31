@@ -815,6 +815,8 @@ class AdminController extends Controller
 		$rule->title = Input::get('title');
 		$rule->subtitle = Input::get('subtitle');
 		$rule->file = Input::get('filename');
+		$rule->original_filename = Input::get('originalfilename');
+		$rule->path_filename = Input::get('path');
 		$rule->save();
 		return redirect('admin/rule')->with('rulestatus', 'Амжилттай хадгалагдлаа!');
 	}
@@ -830,14 +832,16 @@ class AdminController extends Controller
 		$file = $request->file('file');
 		$extension = $file->getClientOriginalExtension();
 		$original_filename = $file->getClientOriginalName();
-		$filepath = Storage::disk('public_path')->put('uploads/'.$file->getClientOriginalName().'_'.md5(microtime()).'.'.$extension,  File::get($file));
+		$filepath = Storage::disk('public_path')->put('uploads/'.$file->getFilename().'.'.$extension,  File::get($file));
 		$filename = $file->getFilename().'.'.$extension;
 		$path = 'storage/'.$filename;
-		return $filename;
+		$array = array();
+		$array[] = $original_filename;
+		$array[] = $filename;
+		$array[] = $path;
+		return response()->json($array);
 	}
 
-	public function getfile($filename){
-		return response()->download('uploads/'.$filename);
-	}
+
  
 }
