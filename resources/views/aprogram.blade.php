@@ -1,5 +1,6 @@
-@extends('layouts.app') @include('partials.navbarNoTrans')
+@extends('layouts.app') 
 
+@section('content')
 <div class="section section-aprogram">
     <div class="container">
         <div class="row">
@@ -12,7 +13,9 @@
                                 <div class="separator separator-danger">♦</div>
                             </div>
                             <img class="img-responsive" src="{{ asset($program->image) }}">
-                                {!! $program->description !!}
+                            <div class="description">
+                            {!! $program->description !!}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -23,7 +26,7 @@
                     <h2 class="description">Холбоотой хөтөлбөрүүд</h2>
                 </div>
                 @foreach($programs->where('programName_id',$program->programName_id)->where('id', '!=', $program->id)->orderBy('created_at', 'desc')->take(3)->get() as $otherprogram)
-                <div class="card card-blog card-plain card-side card-side">
+                <div class="card card-blog card-plain card-side card-program">
                     <a href="{{ url('program', $otherprogram->id) }}" class="header">
                                 <img src="{{ asset($otherprogram->image) }}" class="image-header">
                             </a>
@@ -40,4 +43,4 @@
     </div>
 </div>
 
-@include('partials.footer')
+@endsection

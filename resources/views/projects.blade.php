@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@include('partials.navbarNoTrans')
-
+@section('content')
  <div class="section section-newspage">
         <div class="container">
             <div class="row">
@@ -93,4 +92,4 @@
         </div>
     </div>
 
-@include('partials.footer')
+@endsection

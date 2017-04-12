@@ -17,7 +17,7 @@ class EmailReminder extends Mailable
      *
      * @return void
      */
-    public function __construct($title,$description)
+    public function __construct($title, $description)
     {
         $this->title = $title;
         $this->description = $description;
@@ -33,6 +33,6 @@ class EmailReminder extends Mailable
         return $this->subject('Ардчилсан залуучуудын холбоо')->view('mail')->with([
                         'title' => $this->title,
                         'description' => $this->description,
-                    ]);;
+                    ]);
     }
 }

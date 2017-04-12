@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@include('partials.navbarNoTrans')
-
+@section('content')
  <div class="section section-newspage">
         <div class="container">
             <div class="row">
@@ -46,7 +45,7 @@
                     </div>
                     <div class="list-group" id="newsSidebar">
                         @foreach($categories as $category)
-                        <a href="{{ url('category', $category->id) }}" class="list-group-item {{ Request::is('category', $category->id) ? 'active' : '' }}">
+                        <a href="{{ url('category', $category->id) }}" class="list-group-item {{ (request()->segment(2) == $category->id) ? 'active' : '' }}">
                             {{ $category->name }}
                         </a>
                         @endforeach
@@ -57,4 +56,4 @@
         </div>
     </div>
 
-@include('partials.footer')
+@endsection

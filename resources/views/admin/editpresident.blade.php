@@ -72,7 +72,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Тайлбар</label>
-                                                <textarea class="form-control" name='description' required placeholder="Тайлбар" rows="3">{{$President->description}}</textarea>
+                                                <textarea class="my-editor form-control" name='description' required placeholder="Тайлбар" rows="3">{!! $President->description !!}</textarea>
                                             </div>
                                         </div>
                                     </div>

@@ -1,5 +1,6 @@
-@extends('layouts.app') @include('partials.navbarHome')
+@extends('layouts.app') 
 
+@section('content')
 <div class="section section-header">
     <div class="parallax">
         <div id="headerCarousel" class="carousel slide" data-interval="false" data-ride="carousel">
@@ -18,9 +19,9 @@
                                 @if(!$slide->isButton == 0)
                                 <div class="button-get-started">
                                     <a class="btn btn-white" href="{{ $slide->btnLink }}" target="_blank">
-                                                {{ $slide->btnText }}
-                                                <i class="fa fa-chevron-right"></i>
-                                            </a>
+                                         {{ $slide->btnText }}
+                                         <i class="fa fa-chevron-right"></i>
+                                     </a>
                                 </div>
                                 @endif
                             </div>
@@ -113,11 +114,12 @@
                                     <div class="row subprogram">
                                         @foreach($programs->where('ProgramName_id',$ProgramName->id)->orderBy('created_at', 'desc')->take(3)->get() as $program)
                                         <a href="{{ url('program', $program->id) }}">
-                                            <div class="col-xs-6  col-md-4 col-sm-4">
+                                            <div class="col-xs-6 col-sm-4">
                                                 <div class="card info-section filter filter-color-blue">
                                                     <img class="card-img" src="{{ asset($program->image) }}" alt="Card image">
                                                     <div class="content">
                                                         <p class="card-text">{{ $program->title }}</p>
+                                                        <i class="fa fa-chevron-right"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,11 +136,11 @@
                                 <div class="col-md-8 col-sm-8 comments" id="comment">
                                     <div class="row">
                                         @foreach($comments->where('program_id',$ProgramName->id)->orderBy('created_at', 'desc')->take(1)->get() as $comment)
-                                        <div class="col-md-8 col-sm-8">
+                                        <div class="col-md-12 col-sm-12">
                                             <div class="media">
-                                                <a class="pull-left" href="#">
-                                                        <img class="media-object" src="{{ asset($comment->imageURL) }}" alt="Media Object">
-                                                    </a>
+                                                <div class="pull-left">
+                                                    <img class="media-object" src="{{ asset($comment->imageURL) }}" alt="Media Object">
+                                                </div>
                                                 <div class="media-body">
                                                     <h4 class="media-heading">{{ $comment->title }}</h4>
                                                     <p>{{ $comment->subtitle }}</p>
@@ -197,8 +199,7 @@
                             @foreach($latestnews as $news)
                             <div class="col-xs-12  col-md-4 col-sm-4">
                                 <div class="card">
-                                       <a href="{{ url('news', $news->id) }}">
-                                        
+                                    <a href="{{ url('news', $news->id) }}">
                                         <img class="card-img-top" src="{{ asset($news->image) }}">
                                         </a>
                                     <div class="card-block">
@@ -242,8 +243,8 @@
                 <a href="#testimonial{{ $president->id}}" role="tab" data-toggle="tab">
                     <div class="image-clients">
                         <img alt="..." src="{{ asset($president->photo_URL) }}" />
-                        <p class="pre-firstname">{{ $president->lastname }}</p>
-                        <p class="pre-lastname">{{ $president->firstname }}</p>
+                        <p class="pre-firstname">{{ $president->firstname }}</p>
+                        <p class="pre-lastname">{{ $president->lastname }}</p>
                     </div>
                 </a>
                 <div class="president-timeline">
@@ -257,7 +258,7 @@
             @foreach($presidents as $index => $president)
             <div class="tab-pane @if($loop->last) {{ 'active' }} @endif" id="testimonial{{ $president->id}}">
                 <p class="description ">
-                    {{ $president->description }}
+                    {!! $president->description !!}
                 </p>
             </div>
             @endforeach
@@ -270,7 +271,7 @@
         <div class="row">
             <div class=" col-md-4 col-md-offset-4 ">
                 <div class="text-xs-center text-lg-center">
-                    <a href="#">
+                    <a href="http://www.demparty.mn/" target="_blank">
                         <img src="{{ asset('img/logo/dempartlogo.png') }}" class="img-responsive center-block">
                         <p class="dem-title">Ардчилсан нам</p>
                     </a>
@@ -288,71 +289,59 @@
                         Биднийг дагаарай
                         <i class="fa fa-chevron-right "></i>
                     </button>
-                <button class="btn-like ">
-                        <i class="fa fa-thumbs-up "></i>
-                        Like
-                    </button>
-                <button class="btn-twitter ">
-                        <i class="fa fa-twitter "></i>
-                        Follow @TwitterDev
-                    </button>
+                <a href="https://www.facebook.com/demyouth/" target="_blank">
+                    <button class="btn-like ">
+                            <i class="fa fa-thumbs-up "></i>
+                            Like
+                        </button>
+                </a>
+                <a href="https://twitter.com/demyouth" target="_blank">
+                    <button class="btn-twitter ">
+                            <i class="fa fa-twitter "></i>
+                            Follow @TwitterDev
+                        </button>
+                </a>
             </div>
         </div>
     </div>
 </div>
 
-<input type="text" hidden id="number" value="{{$ProgramNames->count()}}"> @include('partials.footer') @push('script')
+<input type="text" hidden id="number" value="{{$ProgramNames->count()}}"> 
+@endsection
+
+@push('script')
 <script>
-    //     var slider = [];
-    //     var length = $('#number').val();
-    //     var i = 0; 
-    //     if(length > 0){
-    //          for(i; i< length;i++){
-    //            slider.push($('#responsive' + i ).lightSlider({
-    //                     item: 3,
-    //                     loop: false,
-    //                     slideMove: 2,
-    //                     easing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-    //                     speed: 600,
-    //                     responsive: [{
-    //                             breakpoint: 800,
-    //                             settings: {
-    //                                 item: 3,
-    //                                 slideMove: 1,
-    //                                 slideMargin: 6,
-    //                             }
-    //                         },
-    //                         {
-    //                             breakpoint: 480,
-    //                             settings: {
-    //                                 item: 2,
-    //                                 slideMove: 1
-    //                             }
-    //                         }
-    //                     ]
-    //             }));
-    //         }
-    //     }
+    $('#myCarousel').carousel({
+        interval: 1000 * 30
+    });
 
-    //   $('#myCarousel').on('slide.bs.carousel', function (e) {
-    //         var active = $(e.target).find('.carousel-inner > .item.active');
-    //         var from = active.index();
-    //         var next = $(e.relatedTarget);
-    //         var to = next.index();
-    //         slider[from].refresh();
-    //     })
-
-
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:5
+            }
+        }
+    })
 
     @if(session('substatus'))
-    $.notify({
-        icon: 'fa fa-check',
-        message: " {{ session('substatus') }}"
+        $.notify({
+            icon: 'fa fa-check',
+            message: " {{ session('substatus') }}"
 
-    }, {
-        type: 'success',
-        timer: 2000
-    });
+        }, {
+                type: 'success',
+                timer: 2000
+            });
     @endif
+
 </script>
 @endpush

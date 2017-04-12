@@ -21,11 +21,13 @@ class NewsController extends Controller
 	
 	public function showNews($id){
 		$news = News::findOrFail($id);
+		$categories = Category::get();
 		$news->views = $news->views + 1;
 		$news->save();
 		$latestnews = News::where('id', '!=', $news->id)->orderBy('created_at', 'desc')->take(3)->get();
 		return view('anews', [
 		                'news' => $news,
+						'categories' => $categories,
 		                'latestnews' => $latestnews
 		            ]);
 	}

@@ -9,6 +9,7 @@ use App\Location;
 use App\Faq;
 use App\Contact;
 use App\Province;
+use App\Category;
 
 class ContactController extends Controller
 {
@@ -16,9 +17,11 @@ class ContactController extends Controller
 		$provinces = Province::all();
 		$location = Location::all();
 		$faqs = Faq::all();
+		$categories = Category::all();
 		return view('contact',[
 		            'provinces' => $provinces,
 					'locations' => $location,
+					'categories' => $categories,
 		            'faqs' => $faqs,
 		        ]);
 	}

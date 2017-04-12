@@ -14,37 +14,30 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="# ">Товч танилцуулга</a></li>
+                                    <a href="{{url('about?name=home')}}">Товч танилцуулга</a></li>
                                 <li>
-                                    <a href="# ">Холбооны дүрэм</a>
+                                    <a href="{{url('about?name=rule')}}">Холбооны дүрэм</a>
                                 </li>
                                 <li>
-                                    <a href="# ">Удирдах зөвлөл</a>
+                                    <a href="{{url('about?name=structure')}}">Удирдах зөвлөл</a>
                                 </li>
                                 <li>
-                                    <a href="# ">Гишүүд</a>
+                                    <a href="{{url('programs')}}">Хөтөлбөр</a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-2 ">
+            <div class="col-md-2 col-sm-2 ">
                     <div class="info ">
                         <h5 class="title ">Мэдээ</h5>
                         <nav>
                             <ul>
+                            @foreach($categories as $category)
                                 <li>
-                                    <a href="# ">Онцлох мэдээ</a>
+                                    <a href="{{url('category',$category->id)}}">{{$category->name}}</a>
                                 </li>
-                                <li>
-                                    <a href="# ">Үйл явдлын мэдээ</a>
-                                </li>
-                                <li>
-                                    <a href="# ">Фото, видео мэдээ</a>
-                                </li>
-                                <li>
-                                    <a href="# ">Архив</a>
-                                </li>
+                            @endforeach
                             </ul>
                         </nav>
                     </div>
@@ -55,7 +48,7 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="# ">
+                                    <a href="{{url('contact')}}">
                                         <table>
                                             <tr>
                                                 <td style="vertical-align: top;padding-right:20px "><i class="fa fa-map-marker "></i></td>
@@ -65,7 +58,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="# ">
+                                    <a href="{{url('contact')}}">
                                         <table>
                                             <tr>
                                                 <td style="vertical-align: top;padding-right:20px "><i class="fa fa-phone "></i></td>
@@ -75,7 +68,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="# ">
+                                    <a href="{{url('contact')}}">
                                         <table>
                                             <tr>
                                                 <td style="vertical-align: top;padding-right:20px "><i class="fa fa-envelope "></i></td>
@@ -134,13 +127,13 @@
                 </div>
                 <div class="col-md-2 ">
                     <div class="btn-social ">
-                        <a class="btn-simple ">
+                        <a class="btn-simple" href="https://www.facebook.com/demyouth/" target="_blank">
                             <i class="fa fa-facebook "></i>
                         </a>
-                        <a class="btn-simple ">
+                        <a class="btn-simple" href="https://twitter.com/demyouth" target="_blank">
                             <i class="fa fa-twitter "></i>
                         </a>
-                        <a class="btn-simple ">
+                        <a class="btn-simple" href="https://www.youtube.com/channel/UCasjnvbRtGJqOJu06h1LvJA?sub_confirmation=1" target="_blank">
                             <i class="fa fa-youtube "></i>
                         </a>
                     </div>

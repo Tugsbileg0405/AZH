@@ -13,7 +13,7 @@ return [
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
     */
-    'name' => 'АЗХ',
+    'name' => 'Ардчилсан Залуучуудын Холбоо',
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -158,7 +158,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Bogardo\Mailgun\MailgunServiceProvider::class
+        Bogardo\Mailgun\MailgunServiceProvider::class,
+        App\Providers\CategoryProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

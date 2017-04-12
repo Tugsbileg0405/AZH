@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@include('partials.navbarNoTrans')
-
+@section('content')
  <div class="section section-program">
         <div class="container">
             <div class="row">
@@ -31,10 +30,10 @@
                                  @endforeach
                              </div>
                          </div>
-                         @endif
+                        @endif
                   </div>
             </div>
         </div>
     </div>
 
-@include('partials.footer')
+@endsection

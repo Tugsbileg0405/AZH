@@ -38,11 +38,14 @@
 @push('script')
 	<script type="text/javascript">
     	$(document).ready(function(){
+
              $('#myform').validator().on('submit', function (e) {
                 if (!e.isDefaultPrevented()) {
                     $("body").loading();
                 }
             })
+
+
             @if (session('structurestatus'))
             $("body").loading('stop');
         	$.notify({
@@ -54,6 +57,8 @@
                 timer: 1000
             });
            @endif
+
+           
     	});
 	</script>
 @endpush

@@ -1,11 +1,11 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
 
     var data_start_type = $('#langugeValue').attr('data-start-type');
     var $data_type_elem = $('[data-type=' + data_start_type + ']');
     $('.chosen-language').text($data_type_elem.text());
 
-    $('#language li').on('click', function() {
+    $('#language li').on('click', function () {
         $('.chosen-language').text($(this).text());
     });
 
@@ -14,12 +14,12 @@ $(document).ready(function() {
         $bar = $('.transition-timer-carousel-progress-bar'),
         $crsl = $('#headerCarousel');
 
-    $('.carousel-indicators li, .carousel-control').click(function() { $bar.css({ width: 0.5 + '%' }); });
+    $('.carousel-indicators li, .carousel-control').click(function () { $bar.css({ width: 0.5 + '%' }); });
 
     $('#headerCarousel').carousel({ //initialize
         interval: false,
         pause: true
-    }).on('slide.bs.carousel', function() { percent = 0; });
+    }).on('slide.bs.carousel', function () { percent = 0; });
 
     //This event fires immediately when the bootstrap slide instance method is invoked.
     function progressBarCarousel() {
@@ -32,20 +32,15 @@ $(document).ready(function() {
     }
     var barInterval = setInterval(progressBarCarousel, interval); //set interval to progressBarCarousel function
     if (!(/Mobi/.test(navigator.userAgent))) { //tests if it isn't mobile
-        $crsl.hover(function() {
-                clearInterval(barInterval);
-            },
-            function() {
+        $crsl.hover(function () {
+            clearInterval(barInterval);
+        },
+            function () {
                 barInterval = setInterval(progressBarCarousel, interval);
             }
         );
     }
 
-
-    $('#myTab a').click(function(e) {
-        e.preventDefault()
-        $(this).tab('show')
-    })
 
 
 

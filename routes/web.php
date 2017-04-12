@@ -21,7 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/', 'AppController@index')->name('index');
-Route::get('/about', 'AboutController@index');
+Route::get('/about', 'AboutController@index')->name('about');;
 Route::get('/news', 'NewsController@index');
 Route::get('/news/{id}', 'NewsController@showNews')->name('shownews');
 Route::get('/category/{id}', 'NewsController@getCatNews')->name('getCatNews');
@@ -29,10 +29,12 @@ Route::get('/contact', 'ContactController@index');
 Route::post('/contact', 'ContactController@createContact');
 Route::post('/subscribe', 'AppController@createSubscribe');
 Route::get('/projects', 'ProjectsController@index');
-Route::get('/programs', 'ProgramController@index');
+Route::get('/programs', 'ProgramController@index')->name('programs');
+Route::get('/programname/{id}', 'ProgramController@getProgramByName')->name('getProgramByName');
 Route::get('/programs/{id}', 'ProgramController@getProgram')->name('getProgram');
 Route::get('/program/{id}', 'ProgramController@getAProgram')->name('getAProgram');
 Route::get('/sector/{id}', 'AboutController@getSector')->name('getSector');
+Route::post('/savetab', 'AboutController@saveTab')->name('saveTab');
 Route::get('/sectornews/{id}', 'AboutController@getSectorNews')->name('getSectorNews');
 Route::get('/fileentry/get/{filename}', ['as' => 'getentry', 'uses' => 'AboutController@getfile']);
 

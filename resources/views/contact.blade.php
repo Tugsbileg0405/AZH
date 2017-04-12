@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
-@include('partials.navbarNoTrans')
-
+@section('content')
   <div class="section section-contact-us">
         <div class="contact-container">
             <div class="map">
                 <div class="google-map big-map" style="height: 640px">
                 </div>
                 @foreach($locations as $location)
-                <div class="locations" data-lat="{{ $location->province->latitude }}" data-lng="{{ $location->province->longitude }}" data-cname="{{ $location->c_person_name }}" data-cemail="{{ $location->c_person_email }}" data-cphone="{{ $location->c_person_phone }}" data-cfacebook="{{ $location->c_person_facebook }}" data-information="{{ $location->information }}"></div>
+                <div class="locations" data-lat="{{ $location->province->latitude }}" data-locname="{{$location->province->name}}" data-lng="{{ $location->province->longitude }}" data-cname="{{ $location->c_person_name }}" data-cemail="{{ $location->c_person_email }}" data-cphone="{{ $location->c_person_phone }}" data-cfacebook="{{ $location->c_person_facebook }}" data-information="{{ $location->information }}"></div>
                 @endforeach
             </div>
         </div>
@@ -58,7 +57,7 @@
                                                 <div class="col-md-6"></div>
                                                 <div class="col-md-6 text-right" style="padding: 0">
                                                     <button type="submit" class="btn btn-dark">
-                                                              Contact Us
+                                                              Илгээх
                                                               <i class="fa fa-paper-plane"></i>
                                                     </button>
                                                 </div>
@@ -105,7 +104,7 @@
             </div>
         </div>
 
-@include('partials.footer')
+@endsection
 
 
 @push('script')

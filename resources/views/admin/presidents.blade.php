@@ -125,7 +125,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Тайлбар</label>
-                                                <textarea class="form-control" name='description' required placeholder="Тайлбар" rows="3"></textarea>
+                                                <textarea class="form-control my-editor" name='description' required placeholder="Тайлбар" rows="3"></textarea>
                                             </div>
                                         </div>
                                     </div>

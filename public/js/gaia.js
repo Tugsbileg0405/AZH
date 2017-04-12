@@ -71,7 +71,8 @@ $(document).ready(function () {
         var cphone = $(this).data('cphone');
         var cfacebook = $(this).data('cfacebook');
         var information = $(this).data('information');
-        gaia.initGoogleMaps(this, lat, lng, cname, cphone, cemail, cfacebook, information);
+        var locname = $(this).data('locname');
+        gaia.initGoogleMaps(this, lat, lng, cname, cphone, cemail, cfacebook, information, locname);
     });
 
 });
@@ -210,8 +211,7 @@ gaia = {
         });
     }, 6),
 
-    initGoogleMaps: function ($elem, lat, lng, cname, cphone, cemail, cfacebook, information) {
-
+    initGoogleMaps: function ($elem, lat, lng, cname, cphone, cemail, cfacebook, information,locname) {
         var myLatlng = new google.maps.LatLng(lat, lng);
         var marker = new google.maps.Marker({
             position: myLatlng,
@@ -221,13 +221,15 @@ gaia = {
         var contentString = ""
         if (information && cfacebook) {
             contentString = '<div>' +
+                '<p style="font-size:16px">'+ locname + '</p>' +
                 '<p><b>' + cname +
                 '</b></p>' +
-                '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> <tr> <td><i class="fa fa-facebook"></td> <td>' + cfacebook + '</td> </tr> <tr> <td><i class="fa fa-info"></td> <td>' + information + '</td> </tr></table>'
+                '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td> ' + cemail + '</td> </tr> <tr> <td><i class="fa fa-facebook"></td> <td>' + cfacebook + '</td> </tr> <tr> <td><i class="fa fa-info"></td> <td>' + information + '</td> </tr></table>'
             '</div>';
         }
         else if (information) {
             contentString = '<div>' +
+                '<p style="font-size:16px">'+ locname + '</p>' +
                 '<p><b>' + cname +
                 '</b></p>' +
                 '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> <tr> <td><i class="fa fa-info"></td> <td>' + information + '</td> </tr></table>'
@@ -235,6 +237,7 @@ gaia = {
         }
         else if (cfacebook) {
             contentString = '<div>' +
+                '<p style="font-size:16px">'+ locname + '</p>' +
                 '<p><b>' + cname +
                 '</b></p>' +
                 '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> <tr> <td><i class="fa fa-facebook"></td> <td>' + cfacebook + '</td> </tr></table>'
@@ -242,14 +245,15 @@ gaia = {
         }
         else {
             contentString = '<div>' +
+                '<p style="font-size:16px">'+ locname + '</p>' +
                 '<p><b>' + cname +
                 '</b></p>' +
                 '<table> <td><i class="fa fa-phone"></td> <td>' + cphone + '</td> </tr> <tr> <td><i class="fa fa-envelope"></td> <td>' + cemail + '</td> </tr> </table>'
             '</div>';
         }
-
         var infowindow = new google.maps.InfoWindow({
-            content: contentString
+            content: contentString,
+            zIndex: 10,
         });
         marker.addListener('click', function () {
             infowindow.open(map, marker);

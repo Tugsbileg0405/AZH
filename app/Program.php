@@ -8,6 +8,6 @@ class Program extends Model
 {
 	public function programName()
 	    {
-		return $this->belongsTo('App\programName', 'programName_id');
+		return $this->belongsTo('App\ProgramName', 'programName_id');
 	}
 }

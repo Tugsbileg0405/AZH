@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@include('partials.navbarNoTrans')
-
+@section('content')
  <div class="section section-about">
         <div class="container">
             <div class="row">
@@ -9,25 +8,24 @@
                     <div class="row">
                         <div class="col-md-10 col-md-offset-1">
                             <ul class="nav nav-text nav-about" id="myTab" role="tablist">
-                                <li class="nav-item active">
+                                <li class="nav-item @If($tabname == '#home') active @endif">
                                     <a class="nav-link" data-toggle="tab" href="#home" role="tab" aria-controls="home">Танилцуулга</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @If($tabname == '#history') active @endif">
                                     <a class="nav-link" data-toggle="tab" href="#history" role="tab" aria-controls="profile">Түүх</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @If($tabname == '#rule') active @endif">
                                     <a class="nav-link" data-toggle="tab" href="#rule" role="tab" aria-controls="messages">Дүрэм</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @If($tabname == '#structure') active @endif">
                                     <a class="nav-link" data-toggle="tab" href="#structure" role="tab" aria-controls="settings">Бүтэц</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item @If($tabname == '#location') active @endif">
                                     <a class="nav-link" data-toggle="tab" href="#location" role="tab" aria-controls="settings">Салбарууд</a>
                                 </li>
                             </ul>
-
                             <div class="tab-content about-content">
-                                <div class="tab-pane active" id="home" role="tabpanel">
+                                <div class="tab-pane @If($tabname == '#home') active @endif" id="home" role="tabpanel">
                                     <div class="row">
                                         <div class="col-md-12">
                                                 @if(!$intro->isEmpty())
@@ -36,7 +34,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane " id="history" role="tabpanel">
+                                <div class="tab-pane @If($tabname == '#history') active @endif" id="history" role="tabpanel">
                                     <div class="panel-group timeline" id="experience">
                                         @if(!$vow->isEmpty())
                                             {!! $vow[0]->description !!}
@@ -86,7 +84,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="rule" role="tabpanel">
+                                <div class="tab-pane @If($tabname == '#rule') active @endif" id="rule" role="tabpanel">
                                     <h2 class="rule-header">
                                         @if(!$rule->isEmpty())
                                         {{$rule[0]->title}}
@@ -99,8 +97,8 @@
                                     </h2>
                                     <div class="btn-group">
                                         @if(!$rule->isEmpty())
-                                        @if($rule[0]->filename)
-                                        <button class="btn">
+                                        @if(!$rule[0]->filename)
+                                        <button class="btn btn-download">
                                         <a href="{{url('fileentry/get',$rule[0]->file)}}">
                                             <i class="fa fa-download"></i>
                                             ТАТАЖ АВАХ
@@ -108,8 +106,10 @@
                                         </button>
                                         @endif
                                         @endif
-                                        <button class="btn" onclick="printDiv('rule')">
+                                        <button class="btn btn-print" onclick="printDiv('rule')">
+                                            <a>
                                             <i class="fa fa-print"></i> ХЭВЛЭХ
+                                            </a>
                                         </button>
                                     </div>
                                     <div class="rules">
@@ -118,7 +118,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="tab-pane" id="structure" role="tabpanel">
+                                <div class="tab-pane @If($tabname == '#structure') active @endif" id="structure" role="tabpanel">
                                      <div class="row">
                                         <div class="col-md-12">
                                                 @if(!$structure->isEmpty())
@@ -127,7 +127,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane " id="location" role="tabpanel">
+                                <div class="tab-pane @If($tabname == '#location') active @endif" id="location" role="tabpanel">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <p>
@@ -156,19 +156,95 @@
                         <h2 class="description">Мэдээ мэдээлэл</h2>
                     </div>
                     <div class="news-card">
-
+                        @foreach($latestnews as $news)
+                        <div class="card card-blog card-plain">
+                            <a href="{{ url('news',$news->id) }}" class="header">
+                                <h6 class="card-date">{{$news->created_at->format('Y оны m сарын d өдөр')}}</h6>
+                                <img src="{{asset($news->image)}}" class="image-header">
+                            </a>
+                            <div class="content">
+                                <a href="{{ url('news',$news->id) }}" class="card-title">
+                                    <h3>{{$news->title}}</h3>
+                                </a>
+                                <div class="line-divider line-danger"></div>
+                            </div>
+                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
 <input type="text" hidden id="number" value="{{$histories->count()}}">
-@include('partials.footer')
+@endsection
+
 
 @push('script')
     <script>
+        $( document ).ready(function() {
+            var tabname = '{{$tabname}}';
+            if(tabname == '#location'){
+                $($('#aimag').children()[1]).prop('selected', 'selected').change();
+            }
+        });
+
+
+        $('#myTab a').click(function (e) {
+            if($(this).attr('href') == '#location'){
+                 $($('#aimag').children()[1]).prop('selected', 'selected').change();
+            }
+            else{
+                var data = JSON.parse({!! json_encode($lastnews) !!});
+                $('.news-card').empty();
+                data.forEach(function(news){
+                    var dateString = news.created_at;
+                    var date = new Date(dateString.replace(/-/g, '/'));
+                    var month;
+                    var day;
+                    if((date.getMonth()+1)>9){
+                        month = (date.getMonth()+1);
+                    }else{
+                        month = '0'+ (date.getMonth()+1);
+                    }
+                    if(date.getDate() > 9){
+                        day = date.getDate();
+                    }else{
+                        day = '0' + date.getDate();
+                    }
+                   $( ".news-card" ).append( '<div class="card card-blog card-plain">\
+                        <a href="{{ url("news") }}/'+news.id+'" class="header">\
+                            <h6 class="card-date">'+  date.getFullYear() + ' оны '  + month + ' сарын ' + day + ' өдөр' +'</h6>\
+                            <img src="{{ asset('') }}' + news.image +'" class="image-header">\
+                        </a>\
+                        <div class="content">\
+                            <a href="{{ url("news") }}/'+news.id+'" class="card-title">\
+                                <h3>'+news.title+'</h3>\
+                            </a>\
+                            <div class="line-divider line-danger"></div>\
+                        </div>\
+                    </div>' );
+                })
+            }
+            var s= $(this).attr('href');
+            s = s.substring(1);
+            $.ajax({
+                type: 'GET',
+                url: '{{ url("about") }}',
+                data: {
+                    'name': s
+                },
+            }).done(function(data) {
+
+            }).fail(function() {
+               
+            });
+            e.preventDefault()
+            $(this).tab('show')
+        })
+
         function printDiv(divName) {
              var printContents = document.getElementById(divName).innerHTML;
+             printContents = '<div style="text-align:center"><h2>' + $('.rule-header').html()+'</h2>' + '<p>' + $('.rule-description').html() + '</p></div>' + $('.rules').html();
              var originalContents = document.body.innerHTML;
              document.body.innerHTML = printContents;
              window.print();
@@ -180,7 +256,7 @@
             var number = i;
            $('#lightgallery'+ number).lightGallery();
         }
-
+        
 
          $('#aimag').change(function() {
              $.ajaxSetup({
@@ -188,17 +264,31 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
             });
-             $.get("{{ url('sector') }}"+ "/" + $(this).val(), function( data ) {
+            $.get("{{ url('sector') }}"+ "/" + $(this).val(), function( data ) {
                 $('.location-content .rule-header').html(data[0].title);
                 $('.location-content .description').html(data[0].description);
             });
             $.get("{{ url('sectornews') }}"+ "/" + $(this).val(), function( data ) {
                 $('.news-card').empty();
                 data.forEach(function(news){
-                    var date = new Date(news.created_at);
+                    var dateString = news.created_at;
+                    var date = new Date(dateString.replace(/-/g, '/'));
+                    var month;
+                    var day;
+                    if((date.getMonth()+1)>9){
+                        month = (date.getMonth()+1);
+                    }else{
+                        month = '0'+ (date.getMonth()+1);
+                    }
+                    if(date.getDate() > 9){
+                        day = date.getDate();
+                    }else{
+                        day = '0' + date.getDate();
+                    }
+
                    $( ".news-card" ).append( '<div class="card card-blog card-plain animated bounceInUp ">\
                         <a href="{{ url("news") }}/'+news.id+'" class="header">\
-                            <h6 class="card-date">'+  date.getFullYear() + ' оны '  + (date.getMonth() + 1) + ' сарын ' + date.getDate() + ' өдөр' +'</h6>\
+                            <h6 class="card-date">'+  date.getFullYear() + ' оны '  + month + ' сарын ' + day + ' өдөр' +'</h6>\
                             <img src="{{ asset('') }}' + news.image +'" class="image-header">\
                         </a>\
                         <div class="content">\
@@ -211,7 +301,7 @@
                 })
             });
         });
-        $($('#aimag').children()[1]).prop('selected', 'selected').change();
+        
 
     </script>
 @endpush
