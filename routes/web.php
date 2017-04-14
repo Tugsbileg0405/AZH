@@ -18,7 +18,9 @@ Route::get('/', function () {
 );
 
 Auth::routes();
-
+Route::any('/register',function(){
+	abort(404);
+});
 Route::get('/home', 'HomeController@index');
 Route::get('/', 'AppController@index')->name('index');
 Route::get('/about', 'AboutController@index')->name('about');;

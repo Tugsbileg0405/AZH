@@ -7,24 +7,22 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Facebook Metadata /-->
-    <meta property="og:title" content="Ардчилсан Залуучуудын холбоо" />
-    <meta property="og:image" content="{{asset('img/logo/facebooklogo.png')}}" />
-    <meta property="og:description" content="1206 онд Их Монгол улс байгуулагдсан түүхэн үйл явдлыг билэгдэн ардчиллын төлөөх улс төрийн намууд 2000 оны 12 дугаар сарын 06-ны өдөр Их Хурлаа хийж, Ардчилсан намыг байгуулсан билээ. Энэхүү нэгдэлд оролцогч улс төрийн намуудын дэргэдэх залуучуудын байгууллагууд эвсэн нэгдэж, 2000 оны 12 дугаар сарын 07-ны өдөр анхны Үндэсний чуулганаа хуралдуулж, Ардчилсан намын дэргэдэх албан ёсны залуучуудын байгууллага болох Ардчилсан Залуучуудын Холбоог үүсгэн байгуулсан юм."
-    />
+   
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:image" content="@yield('image')" />
+    <meta property="og:description" content="@yield('description')" />
 
     <!-- Google Metadata /-->
-    <meta itemprop="name" content="Ардчилсан Залуучуудын холбоо">
-    <meta itemprop="description" content="1206 онд Их Монгол улс байгуулагдсан түүхэн үйл явдлыг билэгдэн ардчиллын төлөөх улс төрийн намууд 2000 оны 12 дугаар сарын 06-ны өдөр Их Хурлаа хийж, Ардчилсан намыг байгуулсан билээ. Энэхүү нэгдэлд оролцогч улс төрийн намуудын дэргэдэх залуучуудын байгууллагууд эвсэн нэгдэж, 2000 оны 12 дугаар сарын 07-ны өдөр анхны Үндэсний чуулганаа хуралдуулж, Ардчилсан намын дэргэдэх албан ёсны залуучуудын байгууллага болох Ардчилсан Залуучуудын Холбоог үүсгэн байгуулсан юм."
-    />
-    <meta itemprop="image" content="{{asset('img/logo/facebooklogo.png')}}" />
+    <meta itemprop="name" content="@yield('title')">
+    <meta itemprop="description" content="@yield('description')"/>
+    <meta itemprop="image" content="@yield('image')" />
 
     <!-- Twitter Metadata /-->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@demyouth" />
-    <meta name="twitter:title" content="Ардчилсан Залуучуудын холбоо">
-    <meta name="twitter:description" content="1206 онд Их Монгол улс байгуулагдсан түүхэн үйл явдлыг билэгдэн ардчиллын төлөөх улс төрийн намууд 2000 оны 12 дугаар сарын 06-ны өдөр Их Хурлаа хийж, Ардчилсан намыг байгуулсан билээ. Энэхүү нэгдэлд оролцогч улс төрийн намуудын дэргэдэх залуучуудын байгууллагууд эвсэн нэгдэж, 2000 оны 12 дугаар сарын 07-ны өдөр анхны Үндэсний чуулганаа хуралдуулж, Ардчилсан намын дэргэдэх албан ёсны залуучуудын байгууллага болох Ардчилсан Залуучуудын Холбоог үүсгэн байгуулсан юм."
-    />
-    <meta name="twitter:image" content="{{asset('img/logo/facebooklogo.png')}}" />
+    <meta name="twitter:title" content="@yield('title')">
+    <meta name="twitter:description" content="@yield('description')"/>
+    <meta name="twitter:image" content="@yield('image')" />
 
     <title>{{ config('app.name', 'Ардчилсан залуучуудын холбоо') }}</title>
 
@@ -39,6 +37,8 @@
     <link rel="stylesheet" href="{{ asset('css/lightslider.css' )}}">
     <link rel="stylesheet" href="{{ asset('css/lightgallery.min.css' )}}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css' )}}">
+    <link rel="stylesheet" href="{{ asset('css/jssocials.css' )}}">
+    <link rel="stylesheet" href="{{ asset('css/jssocials-theme-flat.css' )}}">
 </head>
 
 <body>
@@ -69,6 +69,7 @@
     <script src="{{ asset('js/lightslider.min.js') }} "></script>
     <script src="{{ asset('js/lightgallery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrapValidator.min.js') }}"></script>
+    <script src="{{ asset('js/jssocials.min.js') }}"></script>
     <!--  js library for devices recognition -->
     <script type="text/javascript " src="{{ asset('js/modernizr.js') }} "></script>
     <!--  script for google maps   -->

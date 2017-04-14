@@ -200,7 +200,7 @@
                     ajax: '{!! route('datatables.getalllocations') !!}',
                     columns: [
                         { data: 'id', name: 'id' },
-                        { data: 'province.name', name: 'province.name' },
+                        { data: 'province.name', name: 'province.name', orderable: false, searchable: false },
                         { data: 'c_person_name', name: 'c_person_name' },
                         { data: 'c_person_phone', name: 'c_person_phone' },
                         { data: 'c_person_email', name: 'c_person_email' },

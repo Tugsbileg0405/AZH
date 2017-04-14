@@ -1,4 +1,4 @@
-   <nav class="navbar navbar-default-2 navbar-transparent navbar-fixed-top" color-on-scroll="50">
+   <nav class="navbar navbar-default-2 navbar-transparent navbar-fixed-top" color-on-scroll="200">
         <!-- if you want to keep the navbar hidden you can add this class to the navbar "navbar-burger"-->
         <div class="navbar-header">
             <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">

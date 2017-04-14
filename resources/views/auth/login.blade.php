@@ -17,7 +17,7 @@
                             {{ csrf_field() }}
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">Таны цахим шуудан</label>
-                                <input id="email" type="email" class="form-control" placeholder="Цахим шуудангийн хаягаа оруулана уу" name="email" value="{{ old('email') }}" required autofocus>
+                                <input id="email" type="email" class="form-control" placeholder="Цахим шуудангийн хаягаа оруулна уу" name="email" value="{{ old('email') }}" required autofocus>
                                  @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -27,7 +27,7 @@
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password">Таны нууц үг</label>
-                                <input id="password" type="password" placeholder="Цахим шуудангийн хаягаа оруулана уу" class="form-control" name="password" required>
+                                <input id="password" type="password" placeholder="Нууц үгээ оруулна уу" class="form-control" name="password" required>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>

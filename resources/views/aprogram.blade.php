@@ -1,5 +1,8 @@
 @extends('layouts.app') 
 
+@section('title', $program->title)
+@section('image', asset($program->image))
+
 @section('content')
 <div class="section section-aprogram">
     <div class="container">
@@ -16,6 +19,9 @@
                             <div class="description">
                             {!! $program->description !!}
                             </div>
+                             <div class="social-share" id="sharePopup">
+                                    
+                             </div>
                         </div>
                     </div>
                 </div>
@@ -44,3 +50,15 @@
 </div>
 
 @endsection
+
+@push('script')
+    <script>
+      $("#sharePopup").jsSocials({
+            url: "{{ Request::url()}}",
+            text: "{{$program->title}}",
+            shareIn: "popup",
+            showLabel: true,
+            shares: ["twitter", {share: "facebook", label: "Share",logo: "fa fa-facebook"}, "googleplus"]
+      });
+    </script>
+@endpush

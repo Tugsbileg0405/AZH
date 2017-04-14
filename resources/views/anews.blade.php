@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@section('title', $news->title)
+@section('description', $news->short_description)
+@section('image', asset($news->image))
+
+
 @section('content')
 <div class="section section-newspage">
         <div class="container">
@@ -17,6 +22,9 @@
                                 </a>
                                 <div class="content">
                                     {!! $news->content !!}
+                                </div>
+                                <div class="social-share" id="sharePopup">
+                                    
                                 </div>
                             </div>
                         </div>
@@ -46,3 +54,16 @@
     </div>
 
 @endsection
+
+@push('script')
+    <script>
+      $('.content').find('iframe').addClass('embed-responsive-item').wrap( "<div class='embed-responsive embed-responsive-16by9'></div>" );
+      $("#sharePopup").jsSocials({
+            url: "{{ Request::url()}}",
+            text: "{{$news->title}}",
+            shareIn: "popup",
+            showLabel: true,
+            shares: ["twitter", {share: "facebook", label: "Share",logo: "fa fa-facebook"}, "googleplus"]
+      });
+    </script>
+@endpush

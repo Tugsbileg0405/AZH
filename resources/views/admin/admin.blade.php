@@ -255,8 +255,8 @@
             columns: [
                 { data: 'id', name: 'id' },
                 { data: 'title', name: 'title' },
-                { data: 'user.name', name: 'user.name' },
-                { data: 'sector.name', name: 'sector.name' },
+                { data: 'user.name', name: 'user.name' , orderable: false, searchable: false },
+                { data: 'sector.name', name: 'sector.name', orderable: false, searchable: false },
                 { data: 'created_at', name: 'created_at' },
                  {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

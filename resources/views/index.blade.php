@@ -1,5 +1,9 @@
 @extends('layouts.app') 
 
+@section('title', 'Ардчилсан Залуучуудын холбоо')
+@section('description', '1206 онд Их Монгол улс байгуулагдсан түүхэн үйл явдлыг билэгдэн ардчиллын төлөөх улс төрийн намууд 2000 оны 12 дугаар сарын 06-ны өдөр Их Хурлаа хийж, Ардчилсан намыг байгуулсан билээ. Энэхүү нэгдэлд оролцогч улс төрийн намуудын дэргэдэх залуучуудын байгууллагууд эвсэн нэгдэж, 2000 оны 12 дугаар сарын 07-ны өдөр анхны Үндэсний чуулганаа хуралдуулж, Ардчилсан намын дэргэдэх албан ёсны залуучуудын байгууллага болох Ардчилсан Залуучуудын Холбоог үүсгэн байгуулсан юм.')
+@section('image', asset("img/logo/facebooklogo.png"))
+
 @section('content')
 <div class="section section-header">
     <div class="parallax">
@@ -285,18 +289,18 @@
     <div class="container ">
         <div class="row ">
             <div class="col-md-6 col-sm-8 col-xs-12 col-md-offset-3 col-sm-offset-2">
-                <button class="btn btn-follow ">
+                     <button class="btn btn-follow ">
                         Биднийг дагаарай
                         <i class="fa fa-chevron-right "></i>
                     </button>
                 <a href="https://www.facebook.com/demyouth/" target="_blank">
-                    <button class="btn-like ">
+                         <button class="btn-like ">
                             <i class="fa fa-thumbs-up "></i>
                             Like
                         </button>
                 </a>
                 <a href="https://twitter.com/demyouth" target="_blank">
-                    <button class="btn-twitter ">
+                          <button class="btn-twitter ">
                             <i class="fa fa-twitter "></i>
                             Follow @TwitterDev
                         </button>

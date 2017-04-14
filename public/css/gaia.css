@@ -779,6 +779,13 @@ a,
     border-radius: 3px;
 }
 
+.btn-google {
+    background-color: #d50f25;
+    border: 2px solid #d50f25;
+    color: white;
+    border-radius: 3px;
+}
+
 .btn-danger,
 .navbar .navbar-nav>li>a.btn-danger {
     border-color: #e78b90;
@@ -4559,9 +4566,21 @@ fieldset[disabled] .form-control {
     h4 {
         line-height: 1.11111111;
     }
+    .card-anews .content img{
+        height:250px !important;
+    }
+    .section-newspage .card-news .card-title h3{
+        font-size: 25px !important;
+    }
+    .section-newspage .card-allnews .card-title h3{
+        -webkit-line-clamp: 4 !important;
+        line-height: 1.05 !important;
+        font-size: 25px !important;
+    }
     .navbar-transparent {
         background-color: transparent;
     }
+    
     .wrapper {
         text-align: center !important;
         overflow: hidden;
@@ -6344,6 +6363,10 @@ div[id^=map] div {
     font-weight: 300;
     line-height: 1.56;
     color: rgba(0, 0, 0, 0.87);
+}
+.card-anews .content img{
+      width:100% !important;
+      max-height:400px !important;
 }
 
 .section-login .panel {
