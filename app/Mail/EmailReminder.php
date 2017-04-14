@@ -30,7 +30,7 @@ class EmailReminder extends Mailable
      */
     public function build()
     {
-        return $this->subject('Ардчилсан залуучуудын холбоо')->view('mail')->with([
+        return $this->subject('Ардчилсан залуучуудын холбоо')->view('email.mail')->with([
                         'title' => $this->title,
                         'description' => $this->description,
                     ]);
