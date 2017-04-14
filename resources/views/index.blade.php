@@ -205,11 +205,13 @@
                                 <div class="card">
                                     <a href="{{ url('news', $news->id) }}">
                                         <img class="card-img-top" src="{{ asset($news->image) }}">
-                                        </a>
+                                    </a>
+                                     <a href="{{ url('news', $news->id) }}">    
                                     <div class="card-block">
                                         <h4 class="card-title">{{ $news->created_at->format('Y оны m сарын d өдөр') }}</h4>
                                         <p class="card-text">{{ $news->title}}</p>
                                     </div>
+                                    </a>  
                                     <a href="{{ url('news', $news->id) }}">
                                         <button class="btn btn-simple">
                                             Дэлгэрэнгүй унших
