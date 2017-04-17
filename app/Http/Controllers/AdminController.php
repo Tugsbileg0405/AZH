@@ -122,8 +122,8 @@ class AdminController extends Controller
     {
         $Location = Location::with('province')->select(['id', 'province_id', 'c_person_name', 'c_person_email','c_person_phone','c_person_facebook','information', 'created_at']);
         return Datatables::of($Location)->editColumn('action', function ($data) {
-             return '	
-						<a class="btn btn-xs btn-success"  href="location/edit/'.$data->id.'">Засах</a>
+            return '	
+                        <a class="btn btn-xs btn-success"  href="location/edit/'.$data->id.'">Засах</a>
                         <a class="btn btn-xs btn-danger" onclick="deleteLocation('.$data->id.')"  >Устгах</a>
                     ';
         })->make(true);
@@ -141,7 +141,7 @@ class AdminController extends Controller
     {
         $sectorInfo = sectorInfo::with('province')->select(['id', 'title', 'location_id', 'created_at']);
         return Datatables::of($sectorInfo)->editColumn('action', function ($data) {
-             return '
+            return '
                         <a class="btn btn-xs btn-success"  href="sectorinfo/edit/'.$data->id.'">Засах</a>
                         <a class="btn btn-xs btn-danger" onclick="deleteSectorInfo('.$data->id.')"  >Устгах</a>
                     ';
@@ -243,7 +243,7 @@ class AdminController extends Controller
     {
         $Category = Category::findOrFail($id);
         return view('admin.editcategory', [
-                         'Category' => $Category
+                        'Category' => $Category
                     ]);
     }
     
@@ -259,7 +259,7 @@ class AdminController extends Controller
     {
         $ProgramName = ProgramName::findOrFail($id);
         return view('admin.editprogramname', [
-                         'ProgramName' => $ProgramName,
+                        'ProgramName' => $ProgramName,
                     ]);
     }
     
@@ -277,8 +277,8 @@ class AdminController extends Controller
         $Program = Program::findOrFail($id);
         $programNames = ProgramName::get();
         return view('admin.editprogram', [
-                         'Program' => $Program,
-                         'programNames' => $programNames
+                        'Program' => $Program,
+                        'programNames' => $programNames
                     ]);
     }
     
@@ -299,8 +299,8 @@ class AdminController extends Controller
         $Programcomment = Programcomment::findOrFail($id);
         $programNames = ProgramName::get();
         return view('admin.editprogramcomment', [
-                         'Programcomment' => $Programcomment,
-                         'programNames' => $programNames
+                        'Programcomment' => $Programcomment,
+                        'programNames' => $programNames
                     ]);
     }
     
@@ -321,7 +321,7 @@ class AdminController extends Controller
     {
         $President = President::findOrFail($id);
         return view('admin.editpresident', [
-                                                     'President' => $President,
+                                                    'President' => $President,
                                                 ]);
     }
     
@@ -342,8 +342,8 @@ class AdminController extends Controller
         $Location = Location::findOrFail($id);
         $provinces = Province::get();
         return view('admin.editlocation', [
-                         'Location' => $Location,
-                         'provinces' => $provinces
+                        'Location' => $Location,
+                        'provinces' => $provinces
                     ]);
     }
     
@@ -366,8 +366,8 @@ class AdminController extends Controller
         $sectorInfo = sectorInfo::findOrFail($id);
         $provinces = Province::get();
         return view('admin.editsectorinfo', [
-                         'sectorInfo' => $sectorInfo,
-                         'provinces' => $provinces
+                        'sectorInfo' => $sectorInfo,
+                        'provinces' => $provinces
                     ]);
     }
     
@@ -387,7 +387,7 @@ class AdminController extends Controller
         $faq = Faq::findOrFail($id);
         return view('admin.editfaq', [
                         'faq' => $faq,
-                   ]);
+                ]);
     }
     
     public function editfaq($id)
@@ -403,7 +403,7 @@ class AdminController extends Controller
     {
         $history = History::findOrFail($id);
         return view('admin.edithistory', [
-                         'history' => $history,
+                        'history' => $history,
                     ]);
     }
     
@@ -426,7 +426,7 @@ class AdminController extends Controller
     {
         $slide = Slide::findOrFail($id);
         return view('admin.editslide', [
-                         'slide' => $slide,
+                        'slide' => $slide,
                     ]);
     }
     
@@ -480,9 +480,9 @@ class AdminController extends Controller
         $categories = Category::get();
         $provinces = Province::get();
         return view('admin.admin', [
-                       'categories' => $categories,
-                       'provinces' => $provinces,
-                   ]);
+                    'categories' => $categories,
+                    'provinces' => $provinces,
+                ]);
     }
     
     
@@ -707,8 +707,8 @@ class AdminController extends Controller
     {
         $slides = Slide::get();
         return view('admin.slide', [
-                      'slides' => $slides,
-                  ]);
+                    'slides' => $slides,
+                ]);
     }
     
     public function createSlide(NewsRequest $request)
@@ -754,8 +754,8 @@ class AdminController extends Controller
     {
         $structure = Structure::get();
         return view('admin.structure', [
-                     'structure' => $structure,
-                 ]);
+                    'structure' => $structure,
+                ]);
     }
     
     public function createStructure()
@@ -771,8 +771,8 @@ class AdminController extends Controller
     {
         $programNames = ProgramName::get();
         return view('admin.programname', [
-                       'programNames' => $programNames,
-                   ]);
+                    'programNames' => $programNames,
+                ]);
     }
     
     public function createProgramName()
