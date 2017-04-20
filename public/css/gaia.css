@@ -3307,7 +3307,6 @@ fieldset[disabled] .form-control {
 .dropdown-menu>li>a:hover,
 .dropdown-menu>li>a:focus {
     background-color: #FFFFFF;
-    color: #c5a47e;
     opacity: 1;
     text-decoration: none;
 }
