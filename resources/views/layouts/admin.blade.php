@@ -21,6 +21,8 @@
     <link href="{{ asset('assets/css/bootstrap-treeview.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/jquery.loading.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/perfect-scrollbar.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet"/>
+    
     <!--  Fonts and icons     -->
     <link href="{{asset('css/font-awesome.min.css')}}" rel="stylesheet">
     <script>

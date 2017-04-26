@@ -22,7 +22,44 @@
                              <div class="social-share" id="sharePopup">
                                     
                              </div>
+                            <h3>Сэтгэгдлүүд</h3>
+                            <div class="media-area" id="programcomment">
+                                    @foreach($program->comments()->orderBy('created_at', 'desc')->get() as $comment)
+                                    <div class="media">
+                                        <a href="#" class="avatar avatar-blue pull-left">
+                                            <img class="media-object" src="{{ asset('img/userdefault.png')}}">
+                                        </a>
+                                        <div class="media-body">
+                                            <h3 class="media-heading">
+                                                @If($comment->user)
+                                                    {{ $comment->users->name }}
+                                                @else
+                                                    {{ $comment->name }}
+                                                @endif
+                                            </h3>
+                                            <h5 class="text-muted pull-right">{{ $comment->created_at->format('Y/m/d H:i') }}</h5>
+                                            <p>{{ $comment->comment }}</p>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                            </div>
+                            <div class="contact-form">
+                                <form method="POST" id="commentForm" action="{{ url('/program/comment', $program->id) }}">
+                                    {{csrf_field()}}
+                                    <div class="form-group">
+                                        <input name="name" class="form-control" id="name" placeholder="Нэрээ оруулна уу..." required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea name="comment" required class="form-control" id="message" placeholder="Та өөрийн сэтгэгдлээ үлдээнэ үү..." rows="8"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-dark pull-right sendButton">
+                                        Сэтгэгдэл үлдээх
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
+                              
                     </div>
                 </div>
             </div>
@@ -53,6 +90,7 @@
 
 @push('script')
     <script>
+
       $("#sharePopup").jsSocials({
             url: "{{ Request::url()}}",
             text: "{{$program->title}}",
@@ -60,5 +98,33 @@
             showLabel: true,
             shares: ["twitter", {share: "facebook", label: "Share",logo: "fa fa-facebook"}, "googleplus"]
       });
+
+       $('.sendButton').attr('disabled',true);
+        $('#message').keyup(function(){
+            if($(this).val().length !=0)
+                $('.sendButton').attr('disabled', false);            
+            else
+                $('.sendButton').attr('disabled',true);
+        })
+
+
+      $('#commentForm').submit(function(e) {
+        $(this).find('button').attr('disabled',true);
+		e.preventDefault();
+		$.ajax({
+			method: $(this).attr('method'),
+			url: $(this).attr('action'),
+			data: $(this).serialize(),
+			context: this,
+		}).done(function(data) {
+			$('#programcomment').prepend(data);
+			$(this).find('button').attr('disabled',false);
+			$(this).trigger('reset');
+			$(window).scrollTop($('#programcomment').offset().top - 150);
+		}).fail(function() {
+			$(this).find('button').attr('disabled',false);
+		});
+	});
+
     </script>
 @endpush

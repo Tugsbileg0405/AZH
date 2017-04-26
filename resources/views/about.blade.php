@@ -16,7 +16,7 @@
                                     <a class="nav-link" data-toggle="tab" href="#home" role="tab" aria-controls="home">Танилцуулга</a>
                                 </li>
                                 <li class="nav-item @If($tabname == '#history') active @endif">
-                                    <a class="nav-link" data-toggle="tab" href="#history" role="tab" aria-controls="profile">Түүх</a>
+                                    <a class="nav-link" data-toggle="tab" href="#history" role="tab" aria-controls="profile">Андгай</a>
                                 </li>
                                 <li class="nav-item @If($tabname == '#rule') active @endif">
                                     <a class="nav-link" data-toggle="tab" href="#rule" role="tab" aria-controls="messages">Дүрэм</a>
@@ -191,7 +191,17 @@
                 $($('#aimag').children()[1]).prop('selected', 'selected').change();
             }
         });
-
+       
+      
+       $('#structure img').each(function (i) {
+                $(this).wrap('<div id="animated-thumbnials'+i+'"><a class="zoomable" href='+$(this).attr('src')+'  data-srcset='+$(this).attr('src')+'></a></div>')
+                 $('#animated-thumbnials'+i).lightGallery({
+                    thumbnail:true,
+                    animateThumb: false,
+                    showThumbByDefault: false
+                }); 
+        });
+   
 
         $('#myTab a').click(function (e) {
             if($(this).attr('href') == '#location'){

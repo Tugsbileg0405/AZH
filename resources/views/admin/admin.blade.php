@@ -38,6 +38,7 @@
                                                     <th>Гарчиг</th>
                                                     <th>Хэрэглэгч</th>
                                                     <th>Холбоотой салбар</th>
+                                                    <th>Уншсан тоо</th>
                                                     <th>Үүсгэсэн огноо</th>
                                                     <th>Засварлах/Устгах</th>
                                                 </tr>
@@ -48,6 +49,7 @@
                                                     <th>Гарчиг</th>
                                                     <th>Хэрэглэгч</th>
                                                     <th>Холбоотой салбар</th>
+                                                    <th>Уншсан тоо</th>
                                                     <th>Үүсгэсэн огноо</th>
                                                     <th>Засварлах/Устгах</th>
                                                 </tr>
@@ -257,6 +259,7 @@
                 { data: 'title', name: 'title' },
                 { data: 'user.name', name: 'user.name' , orderable: false, searchable: false },
                 { data: 'sector.name', name: 'sector.name', orderable: false, searchable: false },
+                { data: 'views', name: 'views' },
                 { data: 'created_at', name: 'created_at' },
                  {data: 'action', name: 'action', orderable: false, searchable: false}
             ]

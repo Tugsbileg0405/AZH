@@ -8,6 +8,7 @@ use App\ProgramName;
 use App\Program;
 use App\Programcomment;
 use App\Category;
+use App\Userprocomment;
 
 class ProgramController extends Controller
 {
@@ -50,6 +51,18 @@ class ProgramController extends Controller
 			$programName  = Program::where('programName_id', '=', $id)->orderBy('created_at', 'desc')->get();
 		}
 		return $programName;
+	}
+
+	public function postAProgramComment(Request $request, $id){
+		$comment = new Userprocomment;
+		$comment->name = $request->get('name');
+		$comment->program_id = $id;
+		$comment->comment = $request->get('comment');
+		$comment->save();
+
+		return response()->view('partials.comment', [
+			'comment' => $comment,
+		], 200);
 	}
 	
 }

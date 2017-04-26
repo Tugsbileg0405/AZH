@@ -31,20 +31,20 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Таны цахим шуудан:</label>
-                                                    <input type="email" autocomplete="off" name="email" value="" required placeholder="Цахим шуудангийн хаягаа оруулана уу" class="form-control form-control-warning form-control-plain">
+                                                    <input type="email" autocomplete="off" name="email" value="" required placeholder="Цахим шуудангийн хаягаа оруулна уу" class="form-control form-control-warning form-control-plain">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Таны илгээх захидал:</label>
-                                                    <textarea name="message" autocomplete="off" required class="form-control form-control-plain" placeholder="Та бидэнд илгээх захидалаа бичнэ үү" rows="8"></textarea>
+                                                    <textarea name="message" autocomplete="off" required class="form-control form-control-plain" placeholder="Та бидэнд илгээх захидлаа бичнэ үү" rows="8"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Илгээх салбар сонгох</label>
                                                     <select class="form-control" name="location" required>
-                                                            <option value="">Та МЗХ-ны салбараас сонгоно уу</option>
+                                                            <option value="">Та АЗХ-ны салбараас сонгоно уу</option>
                                                             @foreach($provinces as $provinces)
                                                             <option value="{{ $provinces->id }}">{{ $provinces->name }}</option>
                                                             @endforeach
@@ -54,7 +54,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Таны утас:</label>
-                                                    <input required type="text" autocomplete="off" name="phone" value="" placeholder="Та холбоо барих утасны дугаараа оруулана уу" class="form-control form-control-plain">
+                                                    <input required type="text" autocomplete="off" name="phone" value="" placeholder="Та холбоо барих утасны дугаараа оруулна уу" class="form-control form-control-plain">
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

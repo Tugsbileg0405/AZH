@@ -10,4 +10,9 @@ class Program extends Model
 	    {
 		return $this->belongsTo('App\ProgramName', 'programName_id');
 	}
+
+	public function comments(){
+		return $this->hasMany('App\Userprocomment', 'program_id');
+	}
+
 }

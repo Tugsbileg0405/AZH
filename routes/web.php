@@ -35,6 +35,7 @@ Route::get('/programs', 'ProgramController@index')->name('programs');
 Route::get('/programname/{id}', 'ProgramController@getProgramByName')->name('getProgramByName');
 Route::get('/programs/{id}', 'ProgramController@getProgram')->name('getProgram');
 Route::get('/program/{id}', 'ProgramController@getAProgram')->name('getAProgram');
+Route::post('/program/comment/{id}', 'ProgramController@postAProgramComment')->name('postAProgramComment');
 Route::get('/sector/{id}', 'AboutController@getSector')->name('getSector');
 Route::post('/savetab', 'AboutController@saveTab')->name('saveTab');
 Route::get('/sectornews/{id}', 'AboutController@getSectorNews')->name('getSectorNews');

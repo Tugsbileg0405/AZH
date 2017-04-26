@@ -13,6 +13,6 @@ class ProgramName extends Model
 	
 	public function comments()
 	    {
-		return $this->hasMany('App\Programcommnet', 'program_id');
+		return $this->hasMany('App\Programcomment', 'program_id');
 	}
 }

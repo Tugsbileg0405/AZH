@@ -318,7 +318,7 @@
 @push('script')
 <script>
     $('#myCarousel').carousel({
-        interval: 1000 * 30
+        interval: 1000 * 5
     });
 
     $('.owl-carousel').owlCarousel({

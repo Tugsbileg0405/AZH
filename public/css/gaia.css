@@ -5781,7 +5781,7 @@ body {
     text-align: left;
 }
 
-.media-heading {
+#comment .media-heading {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -5791,7 +5791,7 @@ body {
     color: #3f3e3e;
 }
 
-.media-body p {
+#comment .media-body p {
     overflow: hidden;
     display: -webkit-box;
     line-height: 1.2;
@@ -5801,7 +5801,7 @@ body {
     color: #3f3e3e;
 }
 
-.media-body span {
+#comment .media-body span {
     overflow: hidden;
     line-height: 1.2;
     display: -webkit-box;
@@ -5810,6 +5810,43 @@ body {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     color: #3f3e3e;
+}
+
+#programcomment .media .avatar {
+    margin: 0 auto;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 30px;
+    border-width: 2px;
+    border-color:#c9c9c9;
+    padding: 0;
+    opacity: .9;
+}
+
+.avatar-blue {
+    color:#28367B;
+}
+
+#programcomment .media-heading {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+#programcomment .media .avatar .media-object {
+    width: 100%;
+    overflow: hidden;
+}
+
+#programcomment .pull-left img{
+    height:auto !important;
+}
+
+#programcomment {
+    margin-top:30px;
+    margin-bottom:30px;
 }
 
 .info-section .card-text {
@@ -6430,4 +6467,43 @@ div[id^=map] div {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+.zoomable {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    opacity: 1;
+    background-color: rgba(0,0,0,0.7);
+}
+.zoomable img {
+    z-index: 1;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -o-transition: .2s;
+    transition: .2s;
+}
+.zoomable:hover img {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.zoomable:hover:before {
+    position: absolute;
+    z-index: 1;
+    content: "\f002";
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255,255,255,0.95);
+}
+.zoomable:hover:after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
 }

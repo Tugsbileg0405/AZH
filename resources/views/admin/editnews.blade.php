@@ -21,8 +21,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
                               <div class="row">
                                  <div class="col-md-12">
                                      <div class="form-group">
@@ -93,8 +91,15 @@
                                                     @endforeach
                                         </select>
                                     </div>
+                                </div>
+                            </div>
 
-                                    
+                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Огноо өөрчлөх:</label>
+                                        <input type="date" name="updatedDate"  value="{{ $news->created_at->format('Y-m-d') }}" class="form-control border-input">
+                                    </div>
                                 </div>
                             </div>
 
@@ -115,56 +120,56 @@
 @push('script')
 	<script type="text/javascript">
         $('#lfm').filemanager('image');
-    	$(document).ready(function(){
-
+        $(document).ready(function(){
             $( "#myform" ).submit(function( event ) {
                 $("body").loading();
             });
 
             @if (session('status'))
             $("body").loading('stop');
-        	$.notify({
-            	icon: 'fa fa-check',
-            	message: " {{ session('status') }}"
+            $.notify({
+                icon: 'fa fa-check',
+                message: " {{ session('status') }}"
 
             },{
                 type: 'success',
                 timer: 2000
             });
-           @endif
-    	});
-            var photos = $('.photos');
-            var result = $('.result');
-            var browse = $('.browse');
-            var input = $('input[name=file]');
-            browse.click(function() {
-                input.click();
+          @endif
+         });
+
+        var photos = $('.photos');
+        var result = $('.result');
+        var browse = $('.browse');
+        var input = $('input[name=file]');
+        browse.click(function() {
+            input.click();
+        });
+        input.change(function() {
+            browse.find('.fa').hide();
+            browse.find('.wait').show();
+            $.ajax({
+                type: 'POST',
+                url: '{{ url("admin/storeaphoto/600/400") }}',
+                data: new FormData(input.closest('form')[0]),
+                contentType: false,
+                processData: false,
+            }).done(function(data) {
+                input.val(null);
+                browse.find('.fa').show();
+                browse.find('.wait').hide();
+                result.html(data);
+            }).fail(function() {
+                browse.find('.fa').show();
+                browse.find('.wait').hide();
             });
-            input.change(function() {
-                browse.find('.fa').hide();
-                browse.find('.wait').show();
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ url("admin/storeaphoto/600/400") }}',
-                    data: new FormData(input.closest('form')[0]),
-                    contentType: false,
-                    processData: false,
-                }).done(function(data) {
-                    input.val(null);
-                    browse.find('.fa').show();
-                    browse.find('.wait').hide();
-                    result.html(data);
-                }).fail(function() {
-                    browse.find('.fa').show();
-                    browse.find('.wait').hide();
-                });
-            });
-            $(document).on('click', '.photo .fa', function() {
-                var photo = $(this).closest('.photo');
-                var path = photo.find('input').val();
-                photo.find('.fa').hide();
-                photo.find('.wait').show();
-                photo.remove();
-            });
+        });
+        $(document).on('click', '.photo .fa', function() {
+            var photo = $(this).closest('.photo');
+            var path = photo.find('input').val();
+            photo.find('.fa').hide();
+            photo.find('.wait').show();
+            photo.remove();
+        });
 	</script>
 @endpush

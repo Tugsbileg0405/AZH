@@ -49,7 +49,7 @@ class AdminController extends Controller
     
     public function getNews()
     {
-        $allnews = News::with('user')->with('sector')->select(['id','location_id' ,'title', 'user_id', 'created_at']);
+        $allnews = News::with('user')->with('sector')->select(['id','location_id' ,'title', 'user_id', 'views' , 'created_at']);
         return Datatables::of($allnews)->editColumn('action', function ($data) {
             return '
                     <a class="btn btn-xs btn-success"  href="admin/news/edit/'.$data->id.'">Засах</a>
@@ -561,6 +561,8 @@ class AdminController extends Controller
         $news->location_id = Input::get('location');
         $news->news_category_id = Input::get('category');
         $news->user_id = Auth::user()->id;
+        $news->created_at = $request->updatedDate;
+        $news->updated_at = $request->updatedDate;
         $news->save();
         return redirect()->back()->with('status', 'Амжилттай хадгалагдлаа!');
     }
