@@ -28,9 +28,11 @@ return [
     // If true, share folder will be created when allow_multi_user is true.
     'allow_share_folder' => true,
 
-    // The database column to identify a user. Make sure the value is unique.
-    // Ex: When set to 'id', the private folder of user will be named as the user id.
-    'user_field' => 'id',
+    // Flexibla way to customize client folders accessibility
+    // Ex: The private folder of user will be named as the user id.
+    'user_field' => function() {
+        return auth()->user()->id;
+    },
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +48,7 @@ return [
     'files_folder_name'  => 'files',
 
     'shared_folder_name' => 'shares',
-    'thumb_folder_name'  => '\thumbs',
+    'thumb_folder_name'  => 'thumbs',
 
     /*
     |--------------------------------------------------------------------------
@@ -88,7 +90,8 @@ return [
         'image/jpeg',
         'image/pjpeg',
         'image/png',
-        'image/gif'
+        'image/gif',
+        'image/svg+xml',
     ],
 
     // available since v1.3.0
@@ -98,6 +101,7 @@ return [
         'image/pjpeg',
         'image/png',
         'image/gif',
+        'image/svg+xml',
         'application/pdf',
         'text/plain',
     ],
@@ -108,8 +112,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'thumb_img_width' => 600,
-    'thumb_img_height' => 400,
+    'thumb_img_width' => 200,
+    'thumb_img_height' => 200,
 
     /*
     |--------------------------------------------------------------------------
@@ -146,4 +150,16 @@ return [
         'ppt'  => 'fa-file-powerpoint-o',
         'pptx' => 'fa-file-powerpoint-o',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | php.ini override
+    |--------------------------------------------------------------------------
+    */
+    // These values override your php.ini settings before uploading files
+    // Set these to false to ingnore and apply your php.ini settings
+    'php_ini_overrides' => [
+        'memory_limit'        => '256M'
+    ]
+
 ];

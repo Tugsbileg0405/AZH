@@ -42,8 +42,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-md-offset-1 text-center">
-                     @if(!$categories->isEmpty())
+                <div class="col-md-3 col-md-offset-1 text-center" id="sidebar">
+                    @if(!$categories->isEmpty())
                     <div class="title-area">
                         <h2 class="description">Ангилал</h2>
                     </div>
@@ -61,3 +61,17 @@
     </div>
 
 @endsection
+
+@push('script')
+    <script>
+         $('#sidebar').scrollToFixed({
+            marginTop: $('.navbar').outerHeight() - 30,
+            limit: function() {
+                var limit = $('.footer').offset().top - $('#sidebar').outerHeight(true) - 10;
+                return limit;
+            },
+            minWidth: 640,
+            zIndex: 999,
+        });
+    </script>
+@endpush

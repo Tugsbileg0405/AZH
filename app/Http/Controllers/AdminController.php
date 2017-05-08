@@ -527,13 +527,9 @@ class AdminController extends Controller
         $news->user_id = Auth::user()->id;
         $news->save();
         $subscribers = Subsriber::get();
-        $emails = Subsriber::get()->toArray();
+        $emails = Subsriber::get()->pluck('email')->toArray();
         if (!$subscribers->isEmpty()) {
-            $user_emails = [];
-            foreach ($emails as $email) {
-                $user_emails[] = $email["email"];
-            }
-            Mail::to($user_emails)->queue(new NewsRemind($news));
+            Mail::to($emails)->queue(new NewsRemind($news));
         }
         return redirect()->back()->with('status', 'Амжилттай хадгалагдлаа!');
     }
@@ -840,13 +836,9 @@ class AdminController extends Controller
         $title = Input::get('title');
         $description = Input::get('description');
         $subscribers = Subsriber::get();
-        $emails = Subsriber::get()->toArray();
+        $emails = Subsriber::get()->pluck('email')->toArray();
         if (!$subscribers->isEmpty()) {
-            $user_emails = [];
-            foreach ($emails as $email) {
-                $user_emails[] = $email["email"];
-            }
-            Mail::to($user_emails)->queue(new EmailReminder($title, $description));
+            Mail::to($emails)->queue(new EmailReminder($title, $description));
         }
         return redirect('admin/sendmail')->with('mailstatus', 'Амжилттай илгээлээ !');
     }

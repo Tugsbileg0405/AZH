@@ -81,6 +81,8 @@
     <script type="text/javascript " src="{{ asset('js/gaia.js') }} "></script>
     <script type="text/javascript " src="{{ asset('js/custom.js ') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js ') }}"></script>
+    <script src="{{ asset('js/jquery-scrolltofixed-min.js ') }}"></script>
+    
     @stack('script')
 </body>
 

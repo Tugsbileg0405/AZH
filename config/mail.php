@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'admin@azh.mn'),
+        'address' => env('MAIL_FROM_ADDRESS', 'demyouthmn@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'Ардчилсан залуучуудын холбоо'),
     ],
 

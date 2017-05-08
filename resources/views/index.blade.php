@@ -77,6 +77,56 @@
     </div>
 </div>
 
+<div class="section section-our-team-freebie">
+    <div class="container">
+        <div class="content">
+            <div class="row">
+                <div class="title-area">
+                    <h2 class="description">Мэдээ мэдээлэл</h2>
+                </div>
+            </div>
+
+            <div class="team">
+                <div class="row">
+                    <div class=" col-md-10 col-md-offset-1">
+                        <div class="row">
+                            @foreach($latestnews as $news)
+                            <div class="col-xs-12  col-md-4 col-sm-4">
+                                <div class="card">
+                                    <a href="{{ url('news', $news->id) }}">
+                                        <img class="card-img-top" src="{{ asset($news->image) }}">
+                                    </a>
+                                     <a href="{{ url('news', $news->id) }}">    
+                                    <div class="card-block">
+                                        <h4 class="card-title">{{ $news->created_at->format('Y оны m сарын d өдөр') }}</h4>
+                                        <p class="card-text">{{ $news->title}}</p>
+                                    </div>
+                                    </a>  
+                                    <a href="{{ url('news', $news->id) }}">
+                                        <button class="btn btn-simple">
+                                            Дэлгэрэнгүй унших
+                                            <i class="fa fa-chevron-right"></i>
+                                       </button>
+                                    </a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="title-area">
+                    <a href="{{ url('news') }}">
+                        <button class="btn btn-showmore">Мэдээллүүдийг харах<i class="fa fa-chevron-right"></i></button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 @if(!$ProgramNames->isEmpty())
 <div class="section section-news">
@@ -187,56 +237,7 @@
 
 
 
-<div class="section section-our-team-freebie">
-    <div class="container">
-        <div class="content">
-            <div class="row">
-                <div class="title-area">
-                    <h2 class="description">Мэдээ мэдээлэл</h2>
-                </div>
-            </div>
 
-            <div class="team">
-                <div class="row">
-                    <div class=" col-md-10 col-md-offset-1">
-                        <div class="row">
-                            @foreach($latestnews as $news)
-                            <div class="col-xs-12  col-md-4 col-sm-4">
-                                <div class="card">
-                                    <a href="{{ url('news', $news->id) }}">
-                                        <img class="card-img-top" src="{{ asset($news->image) }}">
-                                    </a>
-                                     <a href="{{ url('news', $news->id) }}">    
-                                    <div class="card-block">
-                                        <h4 class="card-title">{{ $news->created_at->format('Y оны m сарын d өдөр') }}</h4>
-                                        <p class="card-text">{{ $news->title}}</p>
-                                    </div>
-                                    </a>  
-                                    <a href="{{ url('news', $news->id) }}">
-                                        <button class="btn btn-simple">
-                                            Дэлгэрэнгүй унших
-                                            <i class="fa fa-chevron-right"></i>
-                                       </button>
-                                    </a>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="title-area">
-                    <a href="{{ url('news') }}">
-                        <button class="btn btn-showmore">Мэдээллүүдийг харах<i class="fa fa-chevron-right"></i></button>
-                    </a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <div class="section section-our-clients-freebie">
     <div class="container">

@@ -51,7 +51,7 @@
                                     <a href="{{url('contact')}}">
                                         <table>
                                             <tr>
-                                                <td style="vertical-align: top;padding-right:20px "><i class="fa fa-map-marker "></i></td>
+                                                <td style="vertical-align: top;padding-right:15px "><i class="fa fa-map-marker "></i></td>
                                                 <td> Улаанбаатар хот, Сүхбаатар дүүрэг, 5-р хороо, Д.Сүхбаатарын талбай - 2, Сентрал тауэр, 1010а тоот</td>
                                             </tr>
                                         </table>
@@ -61,7 +61,7 @@
                                     <a href="{{url('contact')}}">
                                         <table>
                                             <tr>
-                                                <td style="vertical-align: top;padding-right:20px "><i class="fa fa-phone "></i></td>
+                                                <td style="vertical-align: top;padding-right:15px "><i class="fa fa-phone "></i></td>
                                                 <td> 7777-9494</td>
                                             </tr>
                                         </table>
@@ -71,7 +71,7 @@
                                     <a href="{{url('contact')}}">
                                         <table>
                                             <tr>
-                                                <td style="vertical-align: top;padding-right:20px "><i class="fa fa-envelope "></i></td>
+                                                <td style="vertical-align: top;padding-right:15px "><i class="fa fa-envelope "></i></td>
                                                 <td> info@demyouth.mn</td>
                                             </tr>
                                         </table>
@@ -109,7 +109,7 @@
         <div class="container ">
             <div class="row ">
                 <div class="col-md-8 ">
-                    © Монголын Ардчилсэн Залуучуудын Холбоо. 2017
+                    © Монголын Ардчилсан Залуучуудын Холбоо. <?php echo (new DateTime)->format("Y"); ?>
                 </div>
                 <div class="col-md-2 ">
                     <div class="dropup">

@@ -8,7 +8,7 @@
             </button>
             <a class="navbar-brand" href="{{ url('/') }}">
             
-                <img src="{{ asset('img/logo/horizontal-mon-white.png') }}" alt="">
+                <img src="{{ asset('img/logo/horizontal-mon-white.svg') }}" alt="">
             </a>
         </div>
         <div class="collapse navbar-collapse">
